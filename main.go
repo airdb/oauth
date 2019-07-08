@@ -10,7 +10,10 @@ import (
 func main() {
 	fmt.Println(config.GetEnv())
 	fmt.Println(config.Get("wechat"))
-	fmt.Println(config.GetString("wechat.api"))
+	fmt.Println(config.GetString("api"))
+	fmt.Println(config.AllSettings())
+	cf := config.AllSettings()
+	fmt.Println("xxxx", cf["wechat"])
 	for _, a := range config.GetDatabases() {
 		fmt.Println(a)
 	}
