@@ -2,8 +2,8 @@ package web
 
 import (
 	"github.com/airdb/passport/web/handlers"
-	"log"
 	"github.com/gin-gonic/gin"
+	"log"
 )
 
 type Router struct {
@@ -20,20 +20,18 @@ func NewRouter() *Router {
 	wechatAPI.POST("/login", handlers.WechatLogin)
 	wechatAPI.GET("/", handlers.Auth)
 
-	return &Router {
+	return &Router{
 		router,
 	}
 }
 
 func (r *Router) Run() {
-	err := r.Engine.Run()  // listen and serve on 0.0.0.0:8080
+	err := r.Engine.Run() // listen and serve on 0.0.0.0:8080
 	if err != nil {
 		log.Fatal("start failed")
 	}
 }
 
-
 func Run() {
 	NewRouter().Run()
 }
-

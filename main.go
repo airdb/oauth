@@ -18,7 +18,7 @@ func main() {
 		fmt.Println(a)
 	}
 	// fmt.Println(config.GetDatabases())
-	
+
 	// dbutils.()
 
 	web.Run()
