@@ -2,8 +2,8 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/PuerkitoBio/goquery v1.5.0/go.mod h1:qD2PgZ9lccMbQlc7eEOjaeRlFQON7xY8kdmcsrnKqMg=
-github.com/airdb/sailor v0.0.0-20190708081643-2a904bdc4c63 h1:ar1n939pLJXvfQcFFML47CeBiQNrr/TfnKnDtf125OY=
-github.com/airdb/sailor v0.0.0-20190708081643-2a904bdc4c63/go.mod h1:8a8lhs0/wfYwaM85t8T0ZqTFVRjzIofL8xGKaCx3QIc=
+github.com/airdb/sailor v0.0.0-20190709024558-692d0db96242 h1:6F7FgFm4/QwvPfDiU8J4oZgTTqqWAeaplTdVM59ARk8=
+github.com/airdb/sailor v0.0.0-20190709024558-692d0db96242/go.mod h1:8a8lhs0/wfYwaM85t8T0ZqTFVRjzIofL8xGKaCx3QIc=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
