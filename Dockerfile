@@ -4,7 +4,7 @@ MAINTAINER Copyright @ airdb.com
 env PROJECT github.com/airdb/passport
 ENV GO111MODULE on
 RUN go get ${PROJECT} && \
-	cd src/${PROJECT} &&
+	cd src/${PROJECT} && \
 	go build -o main main.go
 
 # The second and final stage
