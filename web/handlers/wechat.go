@@ -21,5 +21,6 @@ func WechatLogin(c *gin.Context) {
 
 func Auth(c *gin.Context) {
 	u := "https://open.weixin.qq.com/connect/qrconnect?appid=wxb2a310377819aebd&redirect_uri=https://mina.baobeihuijia.com/dev/lastest/wechatapi/wechat/login&response_type=code&scope=snsapi_login&state=bbhj"
-	c.Redirect(307, u)
+	log.Println("xxx rewrite")
+	c.Redirect(302, u)
 }
