@@ -16,7 +16,7 @@ import (
 // @Router /wechat/login [post]
 func WechatLogin(c *gin.Context) {
 	code := c.PostForm("code")
-	fmt.Println("xxxx", code)
+	fmt.Fprintln(os.Stderr, "hello world", code)
 
 	c.JSON(200, gin.H{
 		"message": "pong",
