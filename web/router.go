@@ -14,8 +14,11 @@ func NewRouter() *Router {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
-	v1API := router.Group("/auth/v1")
 
+	root := router.Group("/")
+	root.GET("/", handlers.Auth)
+
+	v1API := router.Group("/auth/v1")
 	wechatAPI := v1API.Group("/wechat")
 	wechatAPI.POST("/login", handlers.WechatLogin)
 	wechatAPI.GET("/", handlers.Auth)
