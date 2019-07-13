@@ -16,6 +16,8 @@ github.com/airdb/sailor v0.0.0-20190713140836-cb8b90b0f7ca h1:BqPUrvxZr7SWRLckMT
 github.com/airdb/sailor v0.0.0-20190713140836-cb8b90b0f7ca/go.mod h1:wq/9B6LtBB4q1fvbcUgh9HbYKHJpjRZjqGpg7x2ByLY=
 github.com/airdb/sailor v0.0.0-20190713143322-a703e1449eac h1:FXHfMe2XklGasuBWVDX+1av5x3rbzEjAlIxH8SXvdTs=
 github.com/airdb/sailor v0.0.0-20190713143322-a703e1449eac/go.mod h1:wq/9B6LtBB4q1fvbcUgh9HbYKHJpjRZjqGpg7x2ByLY=
+github.com/airdb/sailor v0.0.0-20190713145419-8e2d2bc2314e h1:VmkkL+9470zqY1RnhD4cWJceGskTOOE/H0r+36Le2vo=
+github.com/airdb/sailor v0.0.0-20190713145419-8e2d2bc2314e/go.mod h1:wq/9B6LtBB4q1fvbcUgh9HbYKHJpjRZjqGpg7x2ByLY=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/andybalholm/cascadia v1.0.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=

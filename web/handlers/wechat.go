@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/airdb/passport/model/bo"
 	"github.com/airdb/passport/model/vo"
-	"github.com/airdb/sailor/gin/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,10 +27,17 @@ func WechatLogin(c *gin.Context) {
 		bo.GetWechatAccessToken(logincode.Code)
 	}
 
+	c.JSON(200, gin.H{
+		"message": "john",
+	})
+
+	/*
 	middlewares.SetResp(
 		c,
-		vo.LoginResp{
+		&vo.LoginResp{
 			Nickname: "John",
 		},
 	)
+	 */
+
 }

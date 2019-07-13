@@ -81,4 +81,6 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) {
 
 	var userinfo WechatUserInfo
 	r.ToJSON(&userinfo)
+
+	fmt.Println(userinfo)
 }
