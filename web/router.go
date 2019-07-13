@@ -23,6 +23,7 @@ func NewRouter() *Router {
 	v1API := router.Group("/auth/v1")
 	wechatAPI := v1API.Group("/wechat")
 	wechatAPI.POST("/login", handlers.WechatLogin)
+	wechatAPI.GET("/login", handlers.WechatLogin)
 	wechatAPI.GET("/", handlers.Auth)
 	wechatAPI.HEAD("/", handlers.Auth)
 
