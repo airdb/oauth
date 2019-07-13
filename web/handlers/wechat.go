@@ -19,10 +19,10 @@ import (
 func WechatLogin(c *gin.Context) {
 	code := c.PostForm("code")
 	fmt.Println("request_method_is", c.Request.Method)
-	fmt.Fprintln(os.Stderr, "hello world", code)
+	fmt.Println("code is ", code)
 	var logincode vo.LoginReq
 	if err := c.ShouldBindQuery(&logincode); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		fmt.Println("xxxx", err)
 	}
 
 	c.JSON(200, gin.H{
