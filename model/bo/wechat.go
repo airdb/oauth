@@ -65,7 +65,7 @@ func GetWechatAccessToken(code string) {
 		fmt.Println("error_info", weinfo.Errcode, weinfo.Errmsg)
 	}
 	fmt.Println("xxxx", weinfo.Openid)
-	// GetWechatUserInfo(weinfo)
+	GetWechatUserInfo(weinfo)
 }
 
 func GetWechatUserInfo(weinfo *WechatAccessTokenResp) {
