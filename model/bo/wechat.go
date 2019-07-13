@@ -7,7 +7,8 @@ import (
 )
 
 var (
-	weapp *po.Secret
+	weapp  *po.Secret
+	weinfo *WechatAccessTokenResp
 )
 
 type WechatAccessTokenResp struct {
@@ -21,9 +22,22 @@ type WechatAccessTokenResp struct {
 	Errmsg       string
 }
 
-func ini() {
+type WechatUserInfo struct {
+	Openid     string
+	Nickname   string
+	Sex        uint
+	Province   string
+	City       string
+	Country    string
+	Headimgurl string
+	Privilege  []string
+	Unionid    string
+}
+
+func init() {
 	weapp = po.QuerySecret("wechat")
 }
+
 func GetRewriteURI() string {
 
 	return fmt.Sprintf("%s?appid=%s&redirect_uri=%s&&response_type=code&scope=snsapi_login&state=%s",
@@ -48,7 +62,16 @@ func GetWechatAccessToken(code string) {
 	r.ToJSON(&weinfo)
 
 	fmt.Println("xxxx", weinfo)
+	GetWechatUserInfo()
 }
 
 func GetWechatUserInfo() {
+	param := req.Param{
+		"access_token": weinfo.AccessToken,
+		"openid":       weinfo.Openid,
+	}
+	r, _ := req.Get("https://api.weixin.qq.com/sns/userinfo", param)
+
+	var userinfo WechatUserInfo
+	r.ToJSON(&userinfo)
 }
