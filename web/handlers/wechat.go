@@ -2,9 +2,8 @@ package handlers
 
 import (
 	"fmt"
-	"os"
-	"github.com/gin-gonic/gin"
 	"github.com/airdb/passport/model/vo"
+	"github.com/gin-gonic/gin"
 )
 
 // Wechat login godoc
