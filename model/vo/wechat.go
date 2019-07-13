@@ -6,5 +6,5 @@ type LoginResp struct {
 }
 
 type LoginReq struct {
-	Code string
+	Code string `form:"code"`
 }
