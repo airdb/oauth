@@ -8,4 +8,3 @@ type LoginResp struct {
 type LoginReq struct {
 	Code string
 }
-

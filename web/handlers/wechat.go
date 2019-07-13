@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/airdb/passport/model/bo"
 	"github.com/airdb/passport/model/vo"
 	"github.com/gin-gonic/gin"
 )
@@ -24,6 +25,7 @@ func WechatLogin(c *gin.Context) {
 	}
 
 	fmt.Println("code is ", code, logincode.Code)
+	bo.GetWechatAccessToken(logincode.Code)
 	c.JSON(200, gin.H{
 		"message": "pong",
 	})

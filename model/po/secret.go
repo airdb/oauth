@@ -7,17 +7,17 @@ import (
 )
 
 const (
-	DBName  = "dev_db"
+	DBName = "dev_db"
 )
 
 type Secret struct {
 	gorm.Model
-	Typ string `gorm:"type:varchar(16)"`
-	Appid string `gorm:"type:varchar(64)"`
-	Secret string `gorm:"type:varchar(128)"`
-	URL string `gorm:"type:varchar(64)"`
+	Typ         string `gorm:"type:varchar(16)"`
+	Appid       string `gorm:"type:varchar(64)"`
+	Secret      string `gorm:"type:varchar(128)"`
+	URL         string `gorm:"type:varchar(64)"`
 	RedirectURI string `gorm:"type:varchar(64)"`
-	State string `gorm:"type:varchar(16)"`
+	State       string `gorm:"type:varchar(16)"`
 }
 
 func CreateSecretTab() {
