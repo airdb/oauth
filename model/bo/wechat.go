@@ -66,11 +66,15 @@ func GetWechatAccessToken(code string) {
 }
 
 func GetWechatUserInfo() {
+	fmt.Println("get_wechat_user_info", weinfo)
 	param := req.Param{
 		"access_token": weinfo.AccessToken,
 		"openid":       weinfo.Openid,
 	}
-	r, _ := req.Get("https://api.weixin.qq.com/sns/userinfo", param)
+	r, err := req.Get("https://api.weixin.qq.com/sns/userinfo", param)
+	if err != nil {
+		fmt.Println("get_userinfo_failed, ", err)
+	}
 
 	var userinfo WechatUserInfo
 	r.ToJSON(&userinfo)
