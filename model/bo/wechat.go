@@ -61,8 +61,11 @@ func GetWechatAccessToken(code string) {
 	weinfo := &WechatAccessTokenResp{}
 	r.ToJSON(&weinfo)
 
-	fmt.Println("xxxx", weinfo)
-	GetWechatUserInfo(weinfo)
+	if weinfo.Errmsg != "" {
+		fmt.Println("error_info", weinfo.Errcode, weinfo.Errmsg)
+	}
+	fmt.Println("xxxx", weinfo.Openid)
+	// GetWechatUserInfo(weinfo)
 }
 
 func GetWechatUserInfo(weinfo *WechatAccessTokenResp) {
