@@ -18,14 +18,18 @@ import (
 // @Router /wechat/login [post]
 func WechatLogin(c *gin.Context) {
 	code := c.Param("code")
-	fmt.Println("request_method_is", c.Request.Method,code)
+	fmt.Println("request_method_is", c.Request.Method, code)
+	fmt.Println("xxxxx", c.Params, c.Param("state"))
 	var logincode vo.LoginReq
 	if err := c.ShouldBindQuery(&logincode); err != nil {
 		fmt.Println("xxxx", err)
 	}
 
 	fmt.Println("code is ", logincode.Code)
-	bo.GetWechatAccessToken(code)
+	if code != "" {
+		bo.GetWechatAccessToken(code)
+	}
+
 	c.JSON(200, gin.H{
 		"message": "pong",
 	})
