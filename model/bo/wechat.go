@@ -25,6 +25,7 @@ type WechatUserInfo struct {
 	Openid     string
 	Nickname   string
 	Sex        uint
+	Language   string
 	Province   string
 	City       string
 	Country    string
@@ -90,5 +91,16 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) {
 		fmt.Println("error: ", err)
 	}
 
-	fmt.Println(userinfo, r)
+	info := po.WechatUserInfo{
+		Openid:     userinfo.Openid,
+		Nickname:   userinfo.Nickname,
+		Sex:        userinfo.Sex,
+		Language:   userinfo.Language,
+		City:       userinfo.City,
+		Country:    userinfo.Country,
+		Headimgurl: userinfo.Headimgurl,
+		Unionid:    userinfo.Unionid,
+	}
+
+	po.AddWechatUserInfo(&info)
 }
