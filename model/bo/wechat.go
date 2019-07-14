@@ -11,14 +11,14 @@ var (
 )
 
 type WechatAccessTokenResp struct {
-	AccessToken  string
-	ExpiresIn    string
-	RefreshToken string
-	Openid       string
-	Scope        string
-	Unionid      string
-	Errcode      int
-	Errmsg       string
+	AccessToken  string `json:"access_token"`
+	ExpiresIn    int    `json:"expires_in"`
+	RefreshToken string `json:"refresh_token"`
+	Openid       string `json:"openid"`
+	Scope        string `json:"scope"`
+	Unionid      string `json:"unionid"`
+	Errcode      int    `json:"errcode"`
+	Errmsg       string `json:"errmsg"`
 }
 
 type WechatUserInfo struct {
@@ -64,6 +64,8 @@ func GetWechatAccessToken(code string) {
 		fmt.Println("error: ", err)
 	}
 
+	fmt.Println("access_token: ", weinfo.AccessToken)
+	fmt.Println("access_token: ", weinfo.RefreshToken)
 	if weinfo.Errmsg != "" {
 		fmt.Println("error_info", weinfo.Errcode, weinfo.Errmsg)
 	}
