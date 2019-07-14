@@ -23,12 +23,14 @@ func WechatLogin(c *gin.Context) {
 	}
 
 	fmt.Println("code: ", logincode.Code)
-	if logincode.Code != "" {
-		bo.GetWechatAccessToken(logincode.Code)
+	if logincode.Code == "" {
+		fmt.Println("wechat code is null")
 	}
 
+	userinfo := bo.GetWechatAccessToken(logincode.Code)
 	c.JSON(200, vo.LoginResp{
-		Nickname: "john",
+		Nickname: userinfo.Nickname,
+		Headimgurl: userinfo.Headimgurl,
 	},
 	)
 
