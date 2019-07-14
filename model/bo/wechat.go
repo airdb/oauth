@@ -7,8 +7,7 @@ import (
 )
 
 var (
-	weapp  *po.Secret
-	weinfo *WechatAccessTokenResp
+	weapp *po.Secret
 )
 
 type WechatAccessTokenResp struct {
@@ -59,7 +58,10 @@ func GetWechatAccessToken(code string) {
 	r, _ := req.Get(url)
 
 	weinfo := &WechatAccessTokenResp{}
-	r.ToJSON(&weinfo)
+	err := r.ToJSON(&weinfo)
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
 
 	if weinfo.Errmsg != "" {
 		fmt.Println("error_info", weinfo.Errcode, weinfo.Errmsg)
@@ -80,7 +82,10 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) {
 	}
 
 	var userinfo WechatUserInfo
-	r.ToJSON(&userinfo)
+	err = r.ToJSON(&userinfo)
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
 
 	fmt.Println(userinfo, r)
 }

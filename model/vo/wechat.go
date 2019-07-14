@@ -6,5 +6,4 @@ type LoginReq struct {
 
 type LoginResp struct {
 	Nickname string `json:"nickname"`
-	Pic      string `json:"pic"`
 }

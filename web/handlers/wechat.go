@@ -27,17 +27,23 @@ func WechatLogin(c *gin.Context) {
 		bo.GetWechatAccessToken(logincode.Code)
 	}
 
-	c.JSON(200, gin.H{
-		"message": "john",
-	})
+	c.JSON(200, vo.LoginResp{
+		Nickname: "john",
+	},
+	)
 
-	/*
-	middlewares.SetResp(
+}
+
+func WechatLogout(c *gin.Context) {
+	SetResp(
 		c,
-		&vo.LoginResp{
-			Nickname: "John",
+		vo.LoginResp{
+			Nickname: "john",
 		},
 	)
-	 */
+}
 
+func SetResp(c *gin.Context, value interface{}) {
+	fmt.Print("xxxx", value)
+	c.Set("resp", value)
 }

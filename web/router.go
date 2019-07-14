@@ -27,6 +27,7 @@ func NewRouter() *Router {
 	wechatAPI.GET("/", handlers.Auth)
 	wechatAPI.HEAD("/", handlers.Auth)
 
+	wechatAPI.GET("/logout", handlers.WechatLogout)
 	return &Router{
 		router,
 	}
