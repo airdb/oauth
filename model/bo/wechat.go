@@ -58,6 +58,7 @@ func GetWechatAccessToken(code string) {
 	r, _ := req.Get(url)
 
 	weinfo := &WechatAccessTokenResp{}
+	fmt.Println("access_token: ", r)
 	err := r.ToJSON(&weinfo)
 	if err != nil {
 		fmt.Println("error: ", err)
