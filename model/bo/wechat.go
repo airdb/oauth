@@ -103,4 +103,5 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) *WechatUserInfo {
 	}
 
 	po.AddWechatUserInfo(&info)
+	return &userinfo
 }
