@@ -1,9 +1,11 @@
 package web
 
 import (
+	"log"
+
 	"github.com/airdb/passport/web/handlers"
 	"github.com/gin-gonic/gin"
-	"log"
+	"github.com/airdb/sailor/gin/middlewares"
 )
 
 type Router struct {
@@ -14,6 +16,9 @@ func NewRouter() *Router {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
+	router.Use(
+		middlewares.ToJSON("v1"),
+	)
 
 	auth := router.Group("/")
 

@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"fmt"
+
 	"github.com/airdb/passport/model/bo"
 	"github.com/airdb/passport/model/vo"
+	"github.com/airdb/sailor/gin/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -37,7 +39,7 @@ func WechatLogin(c *gin.Context) {
 }
 
 func WechatLogout(c *gin.Context) {
-	SetResp(
+	middlewares.SetResp(
 		c,
 		vo.LoginResp{
 			Nickname: "john",
