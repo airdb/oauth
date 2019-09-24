@@ -1,5 +1,4 @@
-# passport
-Auth Service
+# Passport
 
 ![Build Status](https://github.com/airdb/passport/workflows/Go/badge.svg)
 
