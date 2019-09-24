@@ -17,4 +17,4 @@ jobs:
       uses: actions/checkout@v1
 
     - name: Build
-      run: go build -o /srv/main main.go
+      run: go build -v -o main main.go
