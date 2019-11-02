@@ -1,50 +1,47 @@
 package web
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/airdb/passport/web/handlers"
-	"github.com/gin-gonic/gin"
+	"github.com/airdb/sailor/config"
 	"github.com/airdb/sailor/gin/middlewares"
+	"github.com/gin-gonic/gin"
 )
 
-type Router struct {
-	*gin.Engine
+func Run() {
+	config.Init()
+	fmt.Printf("Env: %s, Port: %s\n", config.GetEnv(), config.GetPort())
+	err := NewRouter().Run("0.0.0.0:" + config.GetPort())
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
 }
 
-func NewRouter() *Router {
+func NewRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
 	router.Use(
-		middlewares.ToJSON("v1"),
+		middlewares.Jsonifier(),
 	)
 
 	auth := router.Group("/")
-
-	auth.GET("/", handlers.Auth)
+	auth.GET("/", handlers.IndexHandler)
 	auth.HEAD("/", handlers.Auth)
 
 	v1API := router.Group("/auth/v1")
-	wechatAPI := v1API.Group("/wechat")
-	wechatAPI.POST("/login", handlers.WechatLogin)
-	wechatAPI.GET("/login", handlers.WechatLogin)
-	wechatAPI.GET("/", handlers.Auth)
-	wechatAPI.HEAD("/", handlers.Auth)
+	v1API.GET("/:provider", handlers.Redirect)
+	v1API.GET("/:provider/callback", handlers.Callback)
 
-	wechatAPI.GET("/logout", handlers.WechatLogout)
-	return &Router{
-		router,
-	}
-}
+	/*
+		authAPI := v1API.Group("/wechat")
 
-func (r *Router) Run() {
-	err := r.Engine.Run() // listen and serve on 0.0.0.0:8080
-	if err != nil {
-		log.Fatal("start failed")
-	}
-}
-
-func Run() {
-	NewRouter().Run()
+		authAPI.POST("/login", handlers.WechatLogin)
+		authAPI.GET("/login", handlers.WechatLogin)
+		authAPI.GET("/", handlers.Auth)
+		authAPI.HEAD("/", handlers.Auth)
+		authAPI.GET("/logout", handlers.WechatLogout)
+	*/
+	return router
 }

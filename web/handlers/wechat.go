@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/airdb/sailor/enum"
 
 	"github.com/airdb/passport/model/bo"
 	"github.com/airdb/passport/model/vo"
@@ -31,7 +32,7 @@ func WechatLogin(c *gin.Context) {
 
 	userinfo := bo.GetWechatAccessToken(logincode.Code)
 	c.JSON(200, vo.LoginResp{
-		Nickname: userinfo.Nickname,
+		Nickname:   userinfo.Nickname,
 		Headimgurl: userinfo.Headimgurl,
 	},
 	)
@@ -41,6 +42,7 @@ func WechatLogin(c *gin.Context) {
 func WechatLogout(c *gin.Context) {
 	middlewares.SetResp(
 		c,
+		enum.AirdbSuccess,
 		vo.LoginResp{
 			Nickname: "john",
 		},

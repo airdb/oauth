@@ -5,3 +5,6 @@
 
 Feature:
 1. Support Wechat/Google login
+
+# Reference
+[gocialite](https://github.com/danilopolani/gocialite)

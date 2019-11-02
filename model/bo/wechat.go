@@ -48,7 +48,7 @@ func GetRewriteURI() string {
 	)
 }
 
-func GetWechatAccessToken(code string) *WechatUserInfo{
+func GetWechatAccessToken(code string) *WechatUserInfo {
 	url := fmt.Sprintf("%s?appid=%s&secret=%s&code=%s&grant_type=authorization_code",
 		"https://api.weixin.qq.com/sns/oauth2/access_token",
 		weapp.Appid,

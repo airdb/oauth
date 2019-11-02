@@ -5,6 +5,6 @@ type LoginReq struct {
 }
 
 type LoginResp struct {
-	Nickname string `json:"nickname"`
+	Nickname   string `json:"nickname"`
 	Headimgurl string `json:"headimgurl"`
 }

@@ -1,8 +1,9 @@
 package po
 
 import (
+	"log"
+
 	"github.com/airdb/sailor/dbutils"
-	"github.com/airdb/sailor/log"
 	"github.com/jinzhu/gorm"
 )
 
@@ -22,7 +23,7 @@ func CreateWechatUserInfoTab() {
 	dbutils.WriteDB(DBName).DropTable("wechat_user_info").Debug()
 	db := dbutils.WriteDB(DBName).Set("gorm:table_options", "CHARSET=utf8mb4").AutoMigrate(&WechatUserInfo{})
 	if db.Error != nil {
-		log.Logger().Println("error:", db.Error)
+		log.Println("error:", db.Error)
 	}
 }
 
