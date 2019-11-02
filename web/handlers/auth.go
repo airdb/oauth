@@ -1,15 +1,10 @@
 package handlers
 
 import (
-	"github.com/airdb/passport/model/bo"
 	"github.com/airdb/passport/model/vo"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
-
-func Auth(c *gin.Context) {
-	c.Redirect(307, bo.GetRewriteURI())
-}
 
 // Show homepage with login URL
 func IndexHandler(c *gin.Context) {

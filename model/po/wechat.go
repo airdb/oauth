@@ -1,9 +1,6 @@
 package po
 
 import (
-	"log"
-
-	"github.com/airdb/sailor/dbutils"
 	"github.com/jinzhu/gorm"
 )
 
@@ -19,6 +16,7 @@ type WechatUserInfo struct {
 	Unionid    string `gorm:"type:varchar(32)"`
 }
 
+/*
 func CreateWechatUserInfoTab() {
 	dbutils.WriteDB(DBName).DropTable("wechat_user_info").Debug()
 	db := dbutils.WriteDB(DBName).Set("gorm:table_options", "CHARSET=utf8mb4").AutoMigrate(&WechatUserInfo{})
@@ -30,3 +28,4 @@ func CreateWechatUserInfoTab() {
 func AddWechatUserInfo(info *WechatUserInfo) {
 	dbutils.WriteDB(DBName).Save(info).Debug()
 }
+ */

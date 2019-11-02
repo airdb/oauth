@@ -1,15 +1,6 @@
 package handlers
 
-import (
-	"fmt"
-	"github.com/airdb/sailor/enum"
-
-	"github.com/airdb/passport/model/bo"
-	"github.com/airdb/passport/model/vo"
-	"github.com/airdb/sailor/gin/middlewares"
-	"github.com/gin-gonic/gin"
-)
-
+/*
 // Wechat login godoc
 // @Summary wechat login
 // @Description Wechat login
@@ -53,3 +44,4 @@ func SetResp(c *gin.Context, value interface{}) {
 	fmt.Print("xxxx", value)
 	c.Set("resp", value)
 }
+ */

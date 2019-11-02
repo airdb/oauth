@@ -1,8 +1,6 @@
 package po
 
 import (
-	"fmt"
-	"github.com/airdb/sailor/dbutils"
 	"github.com/jinzhu/gorm"
 )
 
@@ -20,6 +18,7 @@ type Secret struct {
 	State       string `gorm:"type:varchar(16)"`
 }
 
+/*
 func CreateSecretTab() {
 	dbutils.WriteDB(DBName).DropTable("secret").Debug()
 	db := dbutils.WriteDB(DBName).Set("gorm:table_options", "CHARSET=utf8mb4").AutoMigrate(&Secret{}).Debug()
@@ -35,3 +34,4 @@ func QuerySecret(typ string) *Secret {
 
 	return &secret
 }
+ */

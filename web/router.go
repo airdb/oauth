@@ -28,7 +28,6 @@ func NewRouter() *gin.Engine {
 
 	auth := router.Group("/")
 	auth.GET("/", handlers.IndexHandler)
-	auth.HEAD("/", handlers.Auth)
 
 	v1API := router.Group("/auth/v1")
 	v1API.GET("/:provider", handlers.Redirect)

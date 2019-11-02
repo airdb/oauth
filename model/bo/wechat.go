@@ -1,9 +1,7 @@
 package bo
 
 import (
-	"fmt"
 	"github.com/airdb/passport/model/po"
-	"github.com/imroc/req"
 )
 
 var (
@@ -34,6 +32,7 @@ type WechatUserInfo struct {
 	Unionid    string
 }
 
+/*1
 func init() {
 	weapp = po.QuerySecret("wechat")
 }
@@ -105,3 +104,4 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) *WechatUserInfo {
 	po.AddWechatUserInfo(&info)
 	return &userinfo
 }
+ */
