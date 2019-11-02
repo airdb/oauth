@@ -20,7 +20,7 @@ RUN go mod download && \
 # Stage 2: Release the binary from the builder stage
 FROM ubuntu
 
-ENV PROJ=bbs-api
+ENV PROJ=passport
 ENV BIN=main
 ENV GITHUB=github.com/airdb/${PROJ}
 ENV BUILDDIR=/go/src/${GITHUB}
