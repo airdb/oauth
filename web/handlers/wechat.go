@@ -44,4 +44,4 @@ func SetResp(c *gin.Context, value interface{}) {
 	fmt.Print("xxxx", value)
 	c.Set("resp", value)
 }
- */
+*/

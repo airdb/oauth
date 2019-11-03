@@ -1,11 +1,13 @@
 package handlers
 
 import (
+	"context"
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -151,12 +153,12 @@ func (g *Gocial) Handle(state, code string) error {
 		return fmt.Errorf("Driver not valid: %s", g.driver)
 	}
 
-	token, err := g.conf.Exchange(oauth2.NoContext, code)
+	token, err := g.conf.Exchange(context.TODO(), code)
 	if err != nil {
 		return fmt.Errorf("oAuth exchanged failed: %s", err.Error())
 	}
 
-	client := g.conf.Client(oauth2.NoContext, token)
+	client := g.conf.Client(context.TODO(), token)
 
 	// Set gocial token
 	g.Token = token
@@ -207,7 +209,10 @@ func (g *Gocial) Handle(state, code string) error {
 // Generate a random token
 func randToken() string {
 	b := make([]byte, 32)
-	rand.Read(b)
+	_, err := rand.Read(b)
+	if err != nil {
+		log.Println(err)
+	}
 	return base64.StdEncoding.EncodeToString(b)
 }
 

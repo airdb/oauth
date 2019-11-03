@@ -1,50 +1,38 @@
 package vo
 
-// In this case we use a map to store our secrets, but you can use dotenv or your framework configuration
-// for example, in revel you could use revel.Config.StringDefault(provider + "_clientID", "") etc.
-var ProviderSecrets = map[string]map[string]string{
-	"github": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/github/callback",
-	},
-	"linkedin": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/linkedin/callback",
-	},
-	"facebook": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/facebook/callback",
-	},
-	"google": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/google/callback",
-	}, "bitbucket": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/bitbucket/callback",
-	},
-	"amazon": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/amazon/callback",
-	},
-	"slack": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/slack/callback",
-	},
-	"asana": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/asana/callback",
-	},
-	"wechat": {
-		"clientID":     "xxxxxxxxxxxxxx",
-		"clientSecret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-		"redirectURL":  "http://localhost:9090/auth/asana/callback",
-	},
+import (
+	"github.com/airdb/passport/model/po"
+)
+
+type ProviderSecret struct {
+	Provider string `json:"provider"`
+	ClientID string `json:"client_id"`
+	ClientSecret string `json:"client_secret"`
+	RedirectURI string `json:"redirect_uri"`
+}
+
+func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
+	return &ProviderSecret{
+		Provider:poSecret.Provider,
+		ClientID:poSecret.ClientID,
+		ClientSecret:poSecret.ClientSecret,
+		RedirectURI:poSecret.RedirectURI,
+	}
+}
+
+func FromPoProviderSecrets(poSecrets []*po.Secret) (secrets []*ProviderSecret) {
+	for _, secret := range poSecrets {
+		secrets = append(secrets, FromPoProviderSecret(secret))
+	}
+	return
+}
+
+func ListProvider() []*ProviderSecret{
+	ProviderSecrets := FromPoProviderSecrets(po.ListProvider())
+
+	return ProviderSecrets
+}
+
+func QueryProvider() *ProviderSecret {
+	return FromPoProviderSecret(po.QueryProvider())
 }

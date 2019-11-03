@@ -1,12 +1,10 @@
 package bo
 
-import (
-	"github.com/airdb/passport/model/po"
-)
-
+/*
 var (
 	weapp *po.Secret
 )
+ */
 
 type WechatAccessTokenResp struct {
 	AccessToken  string `json:"access_token"`
@@ -104,4 +102,4 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) *WechatUserInfo {
 	po.AddWechatUserInfo(&info)
 	return &userinfo
 }
- */
+*/

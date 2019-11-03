@@ -1,6 +1,7 @@
 package po
 
 import (
+	"github.com/airdb/sailor/dbutils"
 	"github.com/jinzhu/gorm"
 )
 
@@ -10,14 +11,25 @@ const (
 
 type Secret struct {
 	gorm.Model
-	Typ         string `gorm:"type:varchar(16)"`
-	Appid       string `gorm:"type:varchar(64)"`
-	Secret      string `gorm:"type:varchar(128)"`
+	Provider         string `gorm:"type:varchar(16)"`
+	ClientID string `gorm:"type:varchar(64)"`
+	ClientSecret      string `gorm:"type:varchar(128)"`
 	URL         string `gorm:"type:varchar(64)"`
 	RedirectURI string `gorm:"type:varchar(64)"`
 	State       string `gorm:"type:varchar(16)"`
 }
 
+func ListProvider() []*Secret{
+	var secret []*Secret
+	dbutils.DefaultDB().Table("secret_tab").Find(secret)
+	return secret
+}
+
+func QueryProvider() *Secret {
+	var secret Secret
+	dbutils.DefaultDB().Table("secret_tab").Find(&secret)
+	return &secret
+}
 /*
 func CreateSecretTab() {
 	dbutils.WriteDB(DBName).DropTable("secret").Debug()
@@ -34,4 +46,4 @@ func QuerySecret(typ string) *Secret {
 
 	return &secret
 }
- */
+*/

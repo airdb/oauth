@@ -28,4 +28,4 @@ func CreateWechatUserInfoTab() {
 func AddWechatUserInfo(info *WechatUserInfo) {
 	dbutils.WriteDB(DBName).Save(info).Debug()
 }
- */
+*/
