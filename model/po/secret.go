@@ -19,15 +19,14 @@ type Secret struct {
 	State        string `gorm:"type:varchar(16)"`
 }
 
-func ListProvider() []*Secret {
-	var secret []*Secret
-	dbutils.DefaultDB().Table("secret_tab").Find(secret)
-	return secret
+func ListProvider() (secret []*Secret) {
+	dbutils.DefaultDB().Table("secret_tab").Find(&secret)
+	return
 }
 
 func QueryProvider() *Secret {
 	var secret Secret
-	dbutils.DefaultDB().Table("secret_tab").Find(&secret)
+	dbutils.DefaultDB().Table("secret_tab").First(&secret)
 	return &secret
 }
 

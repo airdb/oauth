@@ -67,6 +67,7 @@ func Redirect(c *gin.Context) {
 	}
 
 	providerData := vo.QueryProvider()
+	fmt.Println("xxx", providerData)
 	actualScopes := providerScopes[provider]
 
 	authURL, err := NewDispatcher().New().Driver(provider).Scopes(actualScopes).Redirect(
