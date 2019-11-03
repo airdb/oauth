@@ -11,15 +11,15 @@ const (
 
 type Secret struct {
 	gorm.Model
-	Provider         string `gorm:"type:varchar(16)"`
-	ClientID string `gorm:"type:varchar(64)"`
-	ClientSecret      string `gorm:"type:varchar(128)"`
-	URL         string `gorm:"type:varchar(64)"`
-	RedirectURI string `gorm:"type:varchar(64)"`
-	State       string `gorm:"type:varchar(16)"`
+	Provider     string `gorm:"type:varchar(16)"`
+	ClientID     string `gorm:"type:varchar(64)"`
+	ClientSecret string `gorm:"type:varchar(128)"`
+	URL          string `gorm:"type:varchar(64)"`
+	RedirectURI  string `gorm:"type:varchar(64)"`
+	State        string `gorm:"type:varchar(16)"`
 }
 
-func ListProvider() []*Secret{
+func ListProvider() []*Secret {
 	var secret []*Secret
 	dbutils.DefaultDB().Table("secret_tab").Find(secret)
 	return secret
@@ -30,6 +30,7 @@ func QueryProvider() *Secret {
 	dbutils.DefaultDB().Table("secret_tab").Find(&secret)
 	return &secret
 }
+
 /*
 func CreateSecretTab() {
 	dbutils.WriteDB(DBName).DropTable("secret").Debug()

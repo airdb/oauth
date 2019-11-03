@@ -4,7 +4,7 @@ package bo
 var (
 	weapp *po.Secret
 )
- */
+*/
 
 type WechatAccessTokenResp struct {
 	AccessToken  string `json:"access_token"`

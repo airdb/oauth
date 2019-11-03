@@ -5,18 +5,18 @@ import (
 )
 
 type ProviderSecret struct {
-	Provider string `json:"provider"`
-	ClientID string `json:"client_id"`
+	Provider     string `json:"provider"`
+	ClientID     string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
-	RedirectURI string `json:"redirect_uri"`
+	RedirectURI  string `json:"redirect_uri"`
 }
 
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
-		Provider:poSecret.Provider,
-		ClientID:poSecret.ClientID,
-		ClientSecret:poSecret.ClientSecret,
-		RedirectURI:poSecret.RedirectURI,
+		Provider:     poSecret.Provider,
+		ClientID:     poSecret.ClientID,
+		ClientSecret: poSecret.ClientSecret,
+		RedirectURI:  poSecret.RedirectURI,
 	}
 }
 
@@ -27,7 +27,7 @@ func FromPoProviderSecrets(poSecrets []*po.Secret) (secrets []*ProviderSecret) {
 	return
 }
 
-func ListProvider() []*ProviderSecret{
+func ListProvider() []*ProviderSecret {
 	ProviderSecrets := FromPoProviderSecrets(po.ListProvider())
 
 	return ProviderSecrets

@@ -46,7 +46,7 @@ func Callback(c *gin.Context) {
 	fmt.Printf("%#v", user)
 
 	// If no errors, show provider name
-	c.String(200, "HI, " + user.FullName)
+	c.String(200, "HI, "+user.FullName)
 }
 
 func Redirect(c *gin.Context) {
