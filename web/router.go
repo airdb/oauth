@@ -26,21 +26,12 @@ func NewRouter() *gin.Engine {
 		middlewares.Jsonifier(),
 	)
 
-	auth := router.Group("/")
-	auth.GET("/", handlers.IndexHandler)
+	oauth := router.Group("/")
+	oauth.GET("/", handlers.IndexHandler)
 
-	v1API := router.Group("/auth/v1")
+	v1API := router.Group("/oauth/v1")
 	v1API.GET("/:provider", handlers.Redirect)
 	v1API.GET("/:provider/callback", handlers.Callback)
 
-	/*
-		authAPI := v1API.Group("/wechat")
-
-		authAPI.POST("/login", handlers.WechatLogin)
-		authAPI.GET("/login", handlers.WechatLogin)
-		authAPI.GET("/", handlers.Auth)
-		authAPI.HEAD("/", handlers.Auth)
-		authAPI.GET("/logout", handlers.WechatLogout)
-	*/
 	return router
 }
