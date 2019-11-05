@@ -70,16 +70,16 @@ func Redirect(c *gin.Context) {
 	actualScopes := providerScopes[provider]
 
 	reqURL := url.URL{
-		Scheme:c.Request.URL.Scheme,
-		Host:c.Request.Host,
-		Path:c.Request.RequestURI +"/callback",
+		Scheme: c.Request.URL.Scheme,
+		Host:   c.Request.Host,
+		Path:   c.Request.RequestURI + "/callback",
 	}
 
 	fmt.Println("xxxxxlllll", reqURL.String())
 	authURL, err := NewDispatcher().New().Driver(provider).Scopes(actualScopes).Redirect(
 		providerData.ClientID,
 		providerData.ClientSecret,
-		providerData.RedirectURI,
+		reqURL.String(),
 	)
 	// providerData.RedirectURI,
 

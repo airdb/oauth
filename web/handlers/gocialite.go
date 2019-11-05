@@ -126,9 +126,6 @@ func (g *Gocial) Redirect(clientID, clientSecret, redirectURL string) (string, e
 	if err != nil {
 		return "", fmt.Errorf("Redirect URL <%s> not valid: %s", redirectURL, err.Error())
 	}
-	if !strings.HasPrefix(redirectURL, "http://") && !strings.HasPrefix(redirectURL, "https://") {
-		return "", fmt.Errorf("Redirect URL <%s> not valid: protocol not valid", redirectURL)
-	}
 
 	g.conf = &oauth2.Config{
 		ClientID:     clientID,
