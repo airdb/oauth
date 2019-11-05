@@ -2,12 +2,13 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/airdb/sailor/config"
 	"log"
+	"net/http"
 	"net/url"
 
 	"github.com/airdb/passport/model/vo"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 // Show homepage with login URL
@@ -53,11 +54,17 @@ func Callback(c *gin.Context) {
 func Redirect(c *gin.Context) {
 	provider := c.Param("provider")
 
+	fmt.Println("xxxxx", c.Request.RequestURI)
+	fmt.Println("xxxxx", c.Request.Host)
 	providerData := vo.QueryProvider()
-	fmt.Println("xxx", providerData)
+
+	scheme := "http"
+	if config.GetEnv() == "live" {
+		scheme = "https"
+	}
 
 	reqURL := url.URL{
-		Scheme: c.Request.URL.Scheme,
+		Scheme: scheme,
 		Host:   c.Request.Host,
 		Path:   c.Request.RequestURI + "/callback",
 	}
@@ -68,7 +75,6 @@ func Redirect(c *gin.Context) {
 		providerData.ClientSecret,
 		reqURL.String(),
 	)
-	// providerData.RedirectURI,
 
 	// Check for errors (usually driver not valid)
 	if err != nil {

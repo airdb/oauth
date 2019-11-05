@@ -123,8 +123,6 @@ func (g *Gocial) Driver(driver string) *Gocial {
 	return g
 }
 
-
-
 // Redirect returns an URL for the selected social oAuth login
 func (g *Gocial) Redirect(clientID, clientSecret, redirectURL string) (string, error) {
 	// Check if driver is valid
