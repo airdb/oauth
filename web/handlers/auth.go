@@ -53,21 +53,8 @@ func Callback(c *gin.Context) {
 func Redirect(c *gin.Context) {
 	provider := c.Param("provider")
 
-	providerScopes := map[string][]string{
-		"github":    {"public_repo"},
-		"linkedin":  {},
-		"facebook":  {},
-		"google":    {},
-		"bitbucket": {},
-		"amazon":    {},
-		"slack":     {},
-		"asana":     {},
-		"wechat":    {},
-	}
-
 	providerData := vo.QueryProvider()
 	fmt.Println("xxx", providerData)
-	actualScopes := providerScopes[provider]
 
 	reqURL := url.URL{
 		Scheme: c.Request.URL.Scheme,
@@ -76,7 +63,7 @@ func Redirect(c *gin.Context) {
 	}
 
 	fmt.Println("xxxxxlllll", reqURL.String())
-	authURL, err := NewDispatcher().New().Driver(provider).Scopes(actualScopes).Redirect(
+	authURL, err := NewDispatcher().New().Driver(provider).Redirect(
 		providerData.ClientID,
 		providerData.ClientSecret,
 		reqURL.String(),

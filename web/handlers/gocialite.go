@@ -64,6 +64,18 @@ type Gocial struct {
 	Token         *oauth2.Token
 }
 
+var providerScopes = map[string][]string{
+	"github":    {"public_repo"},
+	"linkedin":  {},
+	"facebook":  {},
+	"google":    {},
+	"bitbucket": {},
+	"amazon":    {},
+	"slack":     {},
+	"asana":     {},
+	"wechat":    {},
+}
+
 func init() {
 	drivers.InitializeDrivers(RegisterNewDriver)
 }
@@ -105,14 +117,13 @@ func (g *Gocial) Driver(driver string) *Gocial {
 		g.state = randToken()
 	}
 
+	// Scopes is used to set the oAuth scopes, for example "user", "calendar"
+	g.scopes = append(g.scopes, providerScopes[driver]...)
+
 	return g
 }
 
-// Scopes is used to set the oAuth scopes, for example "user", "calendar"
-func (g *Gocial) Scopes(scopes []string) *Gocial {
-	g.scopes = append(g.scopes, scopes...)
-	return g
-}
+
 
 // Redirect returns an URL for the selected social oAuth login
 func (g *Gocial) Redirect(clientID, clientSecret, redirectURL string) (string, error) {
