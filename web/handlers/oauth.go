@@ -2,13 +2,13 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/airdb/sailor/config"
 	"log"
 	"net/http"
 	"net/url"
 
 	"github.com/airdb/passport/model/vo"
 	"github.com/gin-gonic/gin"
+	"github.com/airdb/sailor/config"
 )
 
 // Show homepage with login URL
@@ -31,24 +31,22 @@ func IndexHandler(c *gin.Context) {
 
 // Handle callback of provider
 func Callback(c *gin.Context) {
-	// Retrieve query params for state and code
-	state := c.Query("state")
-	code := c.Query("code")
-
-	// Handle callback and check for errors
-	user, token, err := NewDispatcher().Handle(state, code)
-	if err != nil {
-		fmt.Println("err", err, token)
-		c.String(200, err.Error())
-		return
+	var logincode vo.LoginReq
+	if err := c.ShouldBindQuery(&logincode); err != nil {
+		fmt.Println("xxxx", err)
 	}
 
-	// Print in terminal user information
-	fmt.Printf("%#v", token)
-	fmt.Printf("%#v", user)
+	fmt.Println("code: ", logincode.Code)
+	if logincode.Code == "" {
+		fmt.Println("wechat code is null")
+	}
 
-	// If no errors, show provider name
-	c.String(200, "HI, "+user.FullName)
+	// userinfo := bo.GetWechatAccessToken(logincode.Code)
+	c.JSON(200, vo.LoginResp{
+		Nickname:   "dean",
+		Headimgurl: "img",
+	},
+	)
 }
 
 func Redirect(c *gin.Context) {
@@ -77,7 +75,7 @@ func Redirect(c *gin.Context) {
 			providerData.RedirectURI,
 		)
 	*/
-	authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%sresponse_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
+	authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
 
 	fmt.Println(authURL)
 	c.Redirect(http.StatusFound, authURL)

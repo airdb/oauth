@@ -30,7 +30,7 @@ type WechatUserInfo struct {
 	Unionid    string
 }
 
-/*1
+/*
 func init() {
 	weapp = po.QuerySecret("wechat")
 }
