@@ -18,6 +18,7 @@ func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 		ClientID:     poSecret.ClientID,
 		ClientSecret: poSecret.ClientSecret,
 		RedirectURI:  poSecret.RedirectURI,
+		URL:          poSecret.URL,
 	}
 }
 
