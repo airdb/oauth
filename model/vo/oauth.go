@@ -9,6 +9,7 @@ type ProviderSecret struct {
 	ClientID     string `json:"client_id"`
 	ClientSecret string `json:"client_secret"`
 	RedirectURI  string `json:"redirect_uri"`
+	URL          string `json:"url"`
 }
 
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
@@ -33,6 +34,6 @@ func ListProvider() []*ProviderSecret {
 	return ProviderSecrets
 }
 
-func QueryProvider() *ProviderSecret {
-	return FromPoProviderSecret(po.QueryProvider())
+func QueryProvider(name string) *ProviderSecret {
+	return FromPoProviderSecret(po.QueryProvider(name))
 }

@@ -24,9 +24,11 @@ func ListProvider() (secret []*Secret) {
 	return
 }
 
-func QueryProvider() *Secret {
+func QueryProvider(provider string) *Secret {
 	var secret Secret
-	dbutils.DefaultDB().Table("secret_tab").First(&secret)
+	dbutils.DefaultDB().Table("secret_tab").Where(&Secret{
+		Provider: provider,
+	}).First(&secret)
 	return &secret
 }
 

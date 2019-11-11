@@ -56,7 +56,7 @@ func Redirect(c *gin.Context) {
 
 	fmt.Println("xxxxx", c.Request.RequestURI)
 	fmt.Println("xxxxx", c.Request.Host)
-	providerData := vo.QueryProvider()
+	providerData := vo.QueryProvider(provider)
 
 	scheme := "http"
 	if config.GetEnv() == "live" {
@@ -70,17 +70,14 @@ func Redirect(c *gin.Context) {
 	}
 
 	fmt.Println("xxxxxlllll", reqURL.String())
-	authURL, err := NewDispatcher().New().Driver(provider).Redirect(
-		providerData.ClientID,
-		providerData.ClientSecret,
-		providerData.RedirectURI,
-	)
-
-	// Check for errors (usually driver not valid)
-	if err != nil {
-		c.String(200, err.Error())
-		return
-	}
+	/*
+		authURL, err := NewDispatcher().New().Driver(provider).Redirect(
+			providerData.ClientID,
+			providerData.ClientSecret,
+			providerData.RedirectURI,
+		)
+	*/
+	authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%sresponse_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
 
 	fmt.Println(authURL)
 	c.Redirect(http.StatusFound, authURL)
