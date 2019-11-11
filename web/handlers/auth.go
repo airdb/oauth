@@ -73,7 +73,7 @@ func Redirect(c *gin.Context) {
 	authURL, err := NewDispatcher().New().Driver(provider).Redirect(
 		providerData.ClientID,
 		providerData.ClientSecret,
-		reqURL.String(),
+		providerData.RedirectURI,
 	)
 
 	// Check for errors (usually driver not valid)
