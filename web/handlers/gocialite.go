@@ -65,7 +65,7 @@ type Gocial struct {
 }
 
 var providerScopes = map[string][]string{
-	"github":    {"public_repo"},
+	"github":    {},
 	"linkedin":  {},
 	"facebook":  {},
 	"google":    {},

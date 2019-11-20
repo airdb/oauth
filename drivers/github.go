@@ -57,4 +57,5 @@ var GithubUserFn = func(client *http.Client, u *vo.User) {
 }
 
 // GithubDefaultScopes contains the default scopes
-var GithubDefaultScopes = []string{"user:email"}
+// var GithubDefaultScopes = []string{"user:email"}
+var GithubDefaultScopes = []string{"user"}
