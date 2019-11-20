@@ -2,13 +2,12 @@ package handlers
 
 import (
 	"fmt"
+	"github.com/airdb/passport/model/vo"
+	"github.com/airdb/sailor/enum"
+	"github.com/airdb/sailor/gin/middlewares"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"net/url"
-
-	"github.com/airdb/passport/model/vo"
-	"github.com/gin-gonic/gin"
-	"github.com/airdb/sailor/config"
 )
 
 // Show homepage with login URL
@@ -42,40 +41,30 @@ func Callback(c *gin.Context) {
 	}
 
 	// userinfo := bo.GetWechatAccessToken(logincode.Code)
-	c.JSON(200, vo.LoginResp{
-		Nickname:   "dean",
-		Headimgurl: "img",
-	},
+	middlewares.SetResp(
+		c,
+		enum.AirdbSuccess,
+		vo.LoginResp{
+			Nickname:   "dean",
+			Headimgurl: "img",
+		},
 	)
 }
 
 func Redirect(c *gin.Context) {
 	provider := c.Param("provider")
-
-	fmt.Println("xxxxx", c.Request.RequestURI)
-	fmt.Println("xxxxx", c.Request.Host)
 	providerData := vo.QueryProvider(provider)
 
-	scheme := "http"
-	if config.GetEnv() == "live" {
-		scheme = "https"
-	}
-
-	reqURL := url.URL{
-		Scheme: scheme,
-		Host:   c.Request.Host,
-		Path:   c.Request.RequestURI + "/callback",
-	}
-
-	fmt.Println("xxxxxlllll", reqURL.String())
-	/*
-		authURL, err := NewDispatcher().New().Driver(provider).Redirect(
+	authURL, err := NewDispatcher().New().Driver(provider).Redirect(
 			providerData.ClientID,
 			providerData.ClientSecret,
 			providerData.RedirectURI,
 		)
-	*/
-	authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+	}
+	// authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
+
 
 	fmt.Println(authURL)
 	c.Redirect(http.StatusFound, authURL)

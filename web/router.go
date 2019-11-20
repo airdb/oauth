@@ -2,7 +2,6 @@ package web
 
 import (
 	"fmt"
-
 	"github.com/airdb/passport/web/handlers"
 	"github.com/airdb/sailor/config"
 	"github.com/airdb/sailor/gin/middlewares"
@@ -22,14 +21,14 @@ func NewRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.New()
-	router.Use(
-		middlewares.Jsonifier(),
-	)
 
 	oauth := router.Group("/")
 	oauth.GET("/", handlers.IndexHandler)
 
 	v1API := router.Group("/oauth/v1")
+	v1API.Use(
+		middlewares.Jsonifier(),
+	)
 	v1API.GET("/:provider", handlers.Redirect)
 	v1API.GET("/:provider/callback", handlers.Callback)
 
