@@ -9,5 +9,4 @@ type LoginResp struct {
 	Headimgurl string `json:"headimgurl"`
 }
 
-
 // 	userinfo := bo.GetWechatAccessToken(logincode.Code)

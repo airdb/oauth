@@ -29,7 +29,7 @@ func NewRouter() *gin.Engine {
 	v1API.Use(
 		middlewares.Jsonifier(),
 	)
-	v1API.GET("/:provider", handlers.Redirect)
+	v1API.GET("/:provider", handlers.Login)
 	v1API.GET("/:provider/callback", handlers.Callback)
 
 	return router

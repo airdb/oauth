@@ -30,6 +30,9 @@ func IndexHandler(c *gin.Context) {
 
 // Handle callback of provider
 func Callback(c *gin.Context) {
+	provider := c.Param("provider")
+
+	fmt.Println("provider", provider)
 	var logincode vo.LoginReq
 	if err := c.ShouldBindQuery(&logincode); err != nil {
 		fmt.Println("xxxx", err)
@@ -51,7 +54,7 @@ func Callback(c *gin.Context) {
 	)
 }
 
-func Redirect(c *gin.Context) {
+func Login(c *gin.Context) {
 	provider := c.Param("provider")
 	providerData := vo.QueryProvider(provider)
 
