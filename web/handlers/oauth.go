@@ -44,6 +44,15 @@ func Callback(c *gin.Context) {
 		fmt.Println("wechat code is null")
 	}
 	g := NewDispatcher().New().Driver(provider)
+
+	providerData := vo.QueryProvider(provider)
+	authURL, _ := g.Redirect(
+		providerData.ClientID,
+		providerData.ClientSecret,
+		providerData.RedirectURI,
+	)
+	fmt.Println("xxx", authURL)
+
 	err := g.Handle(logincode.State, logincode.Code)
 	fmt.Println("xxxx", g.User)
 	if err != nil {
