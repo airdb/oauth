@@ -38,10 +38,27 @@ func Callback(c *gin.Context) {
 		fmt.Println("xxxx", err)
 	}
 
-	fmt.Println("code: ", logincode.Code)
+	fmt.Println("code: ", logincode)
+
 	if logincode.Code == "" {
 		fmt.Println("wechat code is null")
 	}
+	g := NewDispatcher().New().Driver(provider)
+	err := g.Handle(logincode.State, logincode.Code)
+	if err != nil {
+		middlewares.SetResp(
+			c,
+			enum.AirdbFailed,
+			vo.LoginResp{
+				Nickname:   "null",
+				Headimgurl: "null",
+			},
+		)
+
+		return
+	}
+
+	fmt.Println("xxxx", g.User)
 
 	// userinfo := bo.GetWechatAccessToken(logincode.Code)
 	middlewares.SetResp(
