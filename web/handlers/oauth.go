@@ -45,6 +45,7 @@ func Callback(c *gin.Context) {
 	}
 	g := NewDispatcher().New().Driver(provider)
 	err := g.Handle(logincode.State, logincode.Code)
+	fmt.Println("xxxx", g.User)
 	if err != nil {
 		middlewares.SetResp(
 			c,
