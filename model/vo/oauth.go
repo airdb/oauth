@@ -3,7 +3,6 @@ package vo
 import (
 	"fmt"
 	"log"
-	"net/url"
 
 	"github.com/airdb/passport/model/po"
 	"github.com/imroc/req"
@@ -64,17 +63,38 @@ func GithubUserInfo(provider string, code, state string) error {
 		"redirect_uri":  p.RedirectURI,
 	}
 
+	header := req.Header{
+		"Accept":        "application/json",
+	}
+
 	apiurl := "https://github.com/login/oauth/access_token"
-	r, err := req.Post(apiurl, "", param)
+	r, err := req.Post(apiurl, header, param)
 	if err != nil {
 		log.Fatal(err)
 	}
 	var resp GithubResp
-	m, err := url.ParseQuery(r.String())
+	// m, err := url.ParseQuery(r.String())
 
-	resp.AccessToken = m.Get("access_token")
-	resp.Error = m.Get("error")
+	// resp.AccessToken = m.Get("access_token")
+	// resp.Error = m.Get("error")
+	r.ToJSON(&resp)
 	fmt.Println("access_token:", resp.AccessToken)
 	fmt.Println("error", resp.Error)
+	UserInfo(resp.AccessToken)
 	return err
+}
+
+func UserInfo(accessToken string) {
+	token := "token " + accessToken
+	header := req.Header{
+		"Accept":        "application/json",
+		"Authorization": token,
+	}
+
+	apiurl := "https://github.com/login/oauth/access_token"
+	r, err := req.Get(apiurl, header)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(r)
 }

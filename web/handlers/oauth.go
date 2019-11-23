@@ -44,19 +44,19 @@ func Callback(c *gin.Context) {
 		fmt.Println("code is null")
 	}
 
-		err := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
-		if err != nil {
-			middlewares.SetResp(
-				c,
-				enum.AirdbFailed,
-				vo.LoginResp{
-					Nickname:   "null",
-					Headimgurl: "null",
-				},
-			)
+	err := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
+	if err != nil {
+		middlewares.SetResp(
+			c,
+			enum.AirdbFailed,
+			vo.LoginResp{
+				Nickname:   "null",
+				Headimgurl: "null",
+			},
+		)
 
-			return
-		}
+		return
+	}
 
 	middlewares.SetResp(
 		c,
