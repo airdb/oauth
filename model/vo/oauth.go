@@ -1,7 +1,11 @@
 package vo
 
 import (
+	"fmt"
+	"log"
+
 	"github.com/airdb/passport/model/po"
+	"github.com/imroc/req"
 )
 
 type ProviderSecret struct {
@@ -37,4 +41,33 @@ func ListProvider() []*ProviderSecret {
 
 func QueryProvider(name string) *ProviderSecret {
 	return FromPoProviderSecret(po.QueryProvider(name))
+}
+
+type GithubResp struct {
+	AccessToken string `json:"access_token"`
+	Scope       string `json:"scope"`
+	TokenType   string `json:"token_type"`
+}
+
+func GithubUserInfo(provider string, code, state string) error {
+	p := QueryProvider(provider)
+
+	param := req.Param{
+		"client_id":     p.ClientID,
+		"client_secret": p.ClientSecret,
+		"code":          code,
+		"state":         state,
+		"redirect_uri":  "",
+	}
+
+	apiurl := "https://github.com/login/oauth/access_token"
+	r, err := req.Post(apiurl, "", param)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var resp GithubResp
+	err = r.ToJSON(&resp)
+	fmt.Println(r)
+	fmt.Println(resp)
+	return err
 }
