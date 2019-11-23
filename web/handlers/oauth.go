@@ -41,20 +41,11 @@ func Callback(c *gin.Context) {
 	fmt.Println("code: ", logincode)
 
 	if logincode.Code == "" {
-		fmt.Println("wechat code is null")
+		fmt.Println("code is null")
 	}
-	g := NewDispatcher().New().Driver(provider)
 
-	providerData := vo.QueryProvider(provider)
-	authURL, _ := g.Redirect(
-		providerData.ClientID,
-		providerData.ClientSecret,
-		providerData.RedirectURI,
-	)
-	fmt.Println("xxx", authURL)
+	err := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
 
-	err := g.Handle(logincode.State, logincode.Code)
-	fmt.Println("xxxx", g.User)
 	if err != nil {
 		middlewares.SetResp(
 			c,
@@ -68,9 +59,6 @@ func Callback(c *gin.Context) {
 		return
 	}
 
-	fmt.Println("xxxx", g.User)
-
-	// userinfo := bo.GetWechatAccessToken(logincode.Code)
 	middlewares.SetResp(
 		c,
 		enum.AirdbSuccess,
