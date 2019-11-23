@@ -3,6 +3,7 @@ package vo
 import (
 	"fmt"
 	"log"
+	"net/url"
 
 	"github.com/airdb/passport/model/po"
 	"github.com/imroc/req"
@@ -44,9 +45,12 @@ func QueryProvider(name string) *ProviderSecret {
 }
 
 type GithubResp struct {
-	AccessToken string `json:"access_token"`
-	Scope       string `json:"scope"`
-	TokenType   string `json:"token_type"`
+	AccessToken      string `json:"access_token"`
+	Scope            string `json:"scope"`
+	TokenType        string `json:"token_type"`
+	Error            string `json:"error"`
+	ErrorDescription string `json:"error_description"`
+	ErrorUri         string `json:"error_uri"`
 }
 
 func GithubUserInfo(provider string, code, state string) error {
@@ -66,8 +70,11 @@ func GithubUserInfo(provider string, code, state string) error {
 		log.Fatal(err)
 	}
 	var resp GithubResp
-	err = r.ToJSON(&resp)
-	fmt.Println(r)
-	fmt.Println(resp)
+	m, err := url.ParseQuery(r.String())
+	// err = r.ToJSON(&resp)
+
+	resp.AccessToken = m.Get("access_token")
+	resp.Error = m.Get("error")
+	fmt.Println(resp.AccessToken, resp.Error)
 	return err
 }

@@ -44,8 +44,8 @@ func Callback(c *gin.Context) {
 		fmt.Println("code is null")
 	}
 
+	/*
 	err := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
-
 	if err != nil {
 		middlewares.SetResp(
 			c,
@@ -58,6 +58,8 @@ func Callback(c *gin.Context) {
 
 		return
 	}
+
+	 */
 
 	middlewares.SetResp(
 		c,
