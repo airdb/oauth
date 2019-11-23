@@ -64,7 +64,7 @@ func GithubUserInfo(provider string, code, state string) error {
 	}
 
 	header := req.Header{
-		"Accept":        "application/json",
+		"Accept": "application/json",
 	}
 
 	apiurl := "https://github.com/login/oauth/access_token"

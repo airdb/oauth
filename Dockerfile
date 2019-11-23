@@ -18,7 +18,7 @@ RUN go mod download && \
 
 
 # Stage 2: Release the binary from the builder stage
-FROM ubuntu
+FROM golang
 
 ENV PROJ=passport
 ENV BIN=main
