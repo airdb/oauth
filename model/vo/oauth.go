@@ -61,7 +61,7 @@ func GithubUserInfo(provider string, code, state string) error {
 		"client_secret": p.ClientSecret,
 		"code":          code,
 		"state":         state,
-		"redirect_uri":  "",
+		"redirect_uri":  p.RedirectURI,
 	}
 
 	apiurl := "https://github.com/login/oauth/access_token"
@@ -71,10 +71,10 @@ func GithubUserInfo(provider string, code, state string) error {
 	}
 	var resp GithubResp
 	m, err := url.ParseQuery(r.String())
-	// err = r.ToJSON(&resp)
 
 	resp.AccessToken = m.Get("access_token")
 	resp.Error = m.Get("error")
-	fmt.Println(resp.AccessToken, resp.Error)
+	fmt.Println("access_token:", resp.AccessToken)
+	fmt.Println("error", resp.Error)
 	return err
 }
