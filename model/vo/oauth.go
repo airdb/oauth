@@ -91,7 +91,7 @@ func UserInfo(accessToken string) {
 		"Authorization": token,
 	}
 
-	apiurl := "https://github.com/login/oauth/access_token"
+	apiurl := "https://api.github.com/user"
 	r, err := req.Get(apiurl, header)
 	if err != nil {
 		log.Fatal(err)
