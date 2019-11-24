@@ -16,6 +16,10 @@ type ProviderSecret struct {
 	URL          string `json:"url"`
 }
 
+type UserInfo struct {
+	Login string `json:"login"`
+}
+
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
 		Provider:     poSecret.Provider,
@@ -25,6 +29,7 @@ func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 		URL:          poSecret.URL,
 	}
 }
+
 
 func FromPoProviderSecrets(poSecrets []*po.Secret) (secrets []*ProviderSecret) {
 	for _, secret := range poSecrets {
@@ -52,7 +57,7 @@ type GithubResp struct {
 	ErrorUri         string `json:"error_uri"`
 }
 
-func GithubUserInfo(provider string, code, state string) error {
+func GithubUserInfo(provider string, code, state string) *UserInfo{
 	p := QueryProvider(provider)
 
 	param := req.Param{
@@ -80,11 +85,10 @@ func GithubUserInfo(provider string, code, state string) error {
 	r.ToJSON(&resp)
 	fmt.Println("access_token:", resp.AccessToken)
 	fmt.Println("error", resp.Error)
-	UserInfo(resp.AccessToken)
-	return err
+	return GetUserInfo(resp.AccessToken)
 }
 
-func UserInfo(accessToken string) {
+func GetUserInfo(accessToken string) *UserInfo {
 	token := "token " + accessToken
 	header := req.Header{
 		"Accept":        "application/json",
@@ -96,5 +100,8 @@ func UserInfo(accessToken string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(r)
+	var info UserInfo
+	fmt.Println("userinfo: ", r)
+	r.ToJSON(&info)
+	return &info
 }

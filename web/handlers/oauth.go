@@ -44,8 +44,8 @@ func Callback(c *gin.Context) {
 		fmt.Println("code is null")
 	}
 
-	err := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
-	if err != nil {
+	userInfo := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
+	if userInfo == nil {
 		middlewares.SetResp(
 			c,
 			enum.AirdbFailed,
@@ -62,7 +62,7 @@ func Callback(c *gin.Context) {
 		c,
 		enum.AirdbSuccess,
 		vo.LoginResp{
-			Nickname:   "dean",
+			Nickname:   userInfo.Login,
 			Headimgurl: "img",
 		},
 	)
