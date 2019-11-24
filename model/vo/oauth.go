@@ -2,10 +2,9 @@ package vo
 
 import (
 	"fmt"
-	"log"
-
 	"github.com/airdb/passport/model/po"
 	"github.com/imroc/req"
+	"log"
 )
 
 type ProviderSecret struct {
@@ -16,9 +15,6 @@ type ProviderSecret struct {
 	URL          string `json:"url"`
 }
 
-type UserInfo struct {
-	Login string `json:"login"`
-}
 
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
@@ -29,7 +25,6 @@ func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 		URL:          poSecret.URL,
 	}
 }
-
 
 func FromPoProviderSecrets(poSecrets []*po.Secret) (secrets []*ProviderSecret) {
 	for _, secret := range poSecrets {
@@ -57,7 +52,7 @@ type GithubResp struct {
 	ErrorUri         string `json:"error_uri"`
 }
 
-func GithubUserInfo(provider string, code, state string) *UserInfo{
+func GithubUserInfo(provider string, code, state string) *UserInfo {
 	p := QueryProvider(provider)
 
 	param := req.Param{

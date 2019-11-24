@@ -63,7 +63,7 @@ func Callback(c *gin.Context) {
 		enum.AirdbSuccess,
 		vo.LoginResp{
 			Nickname:   userInfo.Login,
-			Headimgurl: "img",
+			Headimgurl: userInfo.AvatarURL,
 		},
 	)
 }
