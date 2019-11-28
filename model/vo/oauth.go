@@ -5,6 +5,7 @@ import (
 	"github.com/airdb/passport/model/po"
 	"github.com/imroc/req"
 	"log"
+	"time"
 )
 
 type ProviderSecret struct {
@@ -14,7 +15,6 @@ type ProviderSecret struct {
 	RedirectURI  string `json:"redirect_uri"`
 	URL          string `json:"url"`
 }
-
 
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
@@ -77,10 +77,14 @@ func GithubUserInfo(provider string, code, state string) *UserInfo {
 
 	// resp.AccessToken = m.Get("access_token")
 	// resp.Error = m.Get("error")
-	r.ToJSON(&resp)
-	fmt.Println("access_token:", resp.AccessToken)
-	fmt.Println("error", resp.Error)
-	return GetUserInfo(resp.AccessToken)
+	err = r.ToJSON(&resp)
+	if err != nil {
+		fmt.Println("access_token:", resp.AccessToken)
+		fmt.Println("error", resp.Error)
+		return GetUserInfo(resp.AccessToken)
+	}
+
+	return nil
 }
 
 func GetUserInfo(accessToken string) *UserInfo {
@@ -97,6 +101,55 @@ func GetUserInfo(accessToken string) *UserInfo {
 	}
 	var info UserInfo
 	fmt.Println("userinfo: ", r)
-	r.ToJSON(&info)
-	return &info
+	err = r.ToJSON(&info)
+	if err != nil {
+		return &info
+	}
+
+	return nil
+}
+
+func LoginRecord(userInfo *UserInfo) {
+	po.UpsertGithubUserInfo(ToPoGitHubUserInfo(userInfo))
+}
+
+func ToPoGitHubUserInfo(info *UserInfo) *po.GitHubUserInfo {
+	return &po.GitHubUserInfo{
+		Login:                   info.Login,
+		GithubID:                info.ID,
+		NodeID:                  "",
+		AvatarURL:               "",
+		GravatarID:              "",
+		URL:                     "",
+		HTMLURL:                 "",
+		FollowersURL:            "",
+		FollowingURL:            "",
+		GistsURL:                "",
+		StarredURL:              "",
+		SubscriptionsURL:        "",
+		OrganizationsURL:        "",
+		ReposURL:                "",
+		EventsURL:               "",
+		ReceivedEventsURL:       "",
+		Type:                    "",
+		SiteAdmin:               false,
+		Company:                 "",
+		Blog:                    "",
+		Location:                "",
+		Email:                   "",
+		Hireable:                false,
+		Bio:                     "",
+		PublicRepos:             0,
+		PublicGists:             0,
+		Followers:               0,
+		Following:               0,
+		GithubCreatedAt:         time.Time{},
+		GithubUpdatedAt:         time.Time{},
+		PrivateGists:            0,
+		TotalPrivateRepos:       0,
+		OwnedPrivateRepos:       0,
+		DiskUsage:               0,
+		Collaborators:           0,
+		TwoFactorAuthentication: false,
+	}
 }
