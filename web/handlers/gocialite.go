@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"github.com/airdb/passport/model/vo"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -14,7 +15,6 @@ import (
 	"sync"
 
 	"github.com/airdb/passport/drivers"
-	"github.com/airdb/passport/model/vo"
 	"golang.org/x/oauth2"
 	"gopkg.in/oleiade/reflections.v1"
 )
