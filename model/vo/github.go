@@ -172,8 +172,8 @@ func GetGithubAuthRedirectURL(providerData *ProviderSecret) (*string, error) {
 		)
 	*/
 	state := randToken()
-	authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s",
-		providerData.URL,
+	authURL := fmt.Sprintf("%s&client_id=%s&redirect_uri=%s&state=%s",
+		"https://github.com/login/oauth/authorize?&response_type=code&scope=snsapi_login&scope=user",
 		providerData.ClientID,
 		providerData.RedirectURI,
 		state,
