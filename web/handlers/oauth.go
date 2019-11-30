@@ -73,7 +73,8 @@ func Login(c *gin.Context) {
 			providerData.RedirectURI,
 		)
 	*/
-	authURL, err := vo.GetOauthRedirectURL(provider)
+	authURL, err := vo.GetAuthRedirectURL(provider)
+	fmt.Print("authURL", err, authURL)
 	if err != nil {
 		c.Redirect(http.StatusFound, "/")
 	}
