@@ -1,7 +1,6 @@
 package vo
 
 import (
-	"fmt"
 	"github.com/airdb/passport/model/po"
 )
 
@@ -69,7 +68,6 @@ func QueryProvider(name string) *ProviderSecret {
 func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 	switch provider {
 	case ProviderGithub:
-		fmt.Println("get user info from: ", ProviderGithub)
 		return GetGithubUserInfo(code, state)
 	}
 	return nil

@@ -40,7 +40,7 @@ func Callback(c *gin.Context) {
 	fmt.Println("provider", provider, logincode)
 
 	userInfo := vo.GetUserInfoFromOauth(provider, logincode.Code, logincode.State)
-	fmt.Print("userinfo", userInfo)
+	fmt.Println("get user info", userInfo)
 	if userInfo == nil {
 		middlewares.SetResp(
 			c,
