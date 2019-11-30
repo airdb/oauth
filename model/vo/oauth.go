@@ -16,6 +16,11 @@ type ProviderSecret struct {
 	URL          string `json:"url"`
 }
 
+const (
+	ProviderGithub = "github"
+	ProviderWechat = "wechat"
+)
+
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
 		Provider:     poSecret.Provider,
@@ -52,8 +57,16 @@ type GithubResp struct {
 	ErrorUri         string `json:"error_uri"`
 }
 
-func GithubUserInfo(provider string, code, state string) *UserInfo {
-	p := QueryProvider(provider)
+func GetUserInfoFromOauth(provider string, code, state string) *UserInfo {
+	switch provider {
+	case ProviderGithub:
+		return GithubUserInfo(code, state)
+	}
+	return nil
+}
+
+func GithubUserInfo(code, state string) *UserInfo {
+	p := QueryProvider(ProviderGithub)
 
 	param := req.Param{
 		"client_id":     p.ClientID,

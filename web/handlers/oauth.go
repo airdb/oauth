@@ -32,19 +32,15 @@ func IndexHandler(c *gin.Context) {
 func Callback(c *gin.Context) {
 	provider := c.Param("provider")
 
-	fmt.Println("provider", provider)
 	var logincode vo.LoginReq
 	if err := c.ShouldBindQuery(&logincode); err != nil {
 		fmt.Println("xxxx", err)
 	}
 
-	fmt.Println("code: ", logincode)
+	fmt.Println("provider", provider, logincode)
 
-	if logincode.Code == "" {
-		fmt.Println("code is null")
-	}
-
-	userInfo := vo.GithubUserInfo(provider, logincode.Code, logincode.State)
+	userInfo := vo.GetUserInfoFromOauth(provider, logincode.Code, logincode.State)
+	fmt.Print("userinfo", userInfo)
 	if userInfo == nil {
 		middlewares.SetResp(
 			c,
