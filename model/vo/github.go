@@ -86,12 +86,12 @@ func GetGithubUserInfo(code, state string) *GithubUserInfo {
 	var resp GithubAccessTokenResp
 	err = r.ToJSON(&resp)
 	if err != nil {
-		fmt.Println("access_token:", resp.AccessToken)
+		fmt.Println("access_token:", resp)
 		fmt.Println("error", resp.Error)
-		return GetUserInfo(resp.AccessToken)
+		return nil
 	}
 
-	return nil
+	return GetUserInfo(resp.AccessToken)
 }
 
 func GetUserInfo(accessToken string) *GithubUserInfo {

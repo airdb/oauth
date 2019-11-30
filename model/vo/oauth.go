@@ -5,6 +5,11 @@ import (
 	"github.com/airdb/passport/model/po"
 )
 
+const (
+	ProviderGithub = "github"
+	ProviderWechat = "wechat"
+)
+
 type ProviderSecret struct {
 	Provider     string `json:"provider"`
 	ClientID     string `json:"client_id"`
@@ -13,10 +18,21 @@ type ProviderSecret struct {
 	URL          string `json:"url"`
 }
 
-const (
-	ProviderGithub = "github"
-	ProviderWechat = "wechat"
-)
+type LoginReq struct {
+	Code  string `form:"code"`
+	State string `form:"state"`
+}
+
+type User struct {
+	ID        string                 `json:"id"`
+	Username  string                 `json:"username"`
+	FirstName string                 `json:"first_name"`
+	LastName  string                 `json:"last_name"`
+	FullName  string                 `json:"full_name"`
+	Email     string                 `json:"email"`
+	Avatar    string                 `json:"avatar"`
+	Raw       map[string]interface{} `json:"raw"` // Raw data
+}
 
 func FromPoProviderSecret(poSecret *po.Secret) *ProviderSecret {
 	return &ProviderSecret{
@@ -48,7 +64,7 @@ func QueryProvider(name string) *ProviderSecret {
 func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 	switch provider {
 	case ProviderGithub:
-		fmt.Print("get user info from: ", ProviderGithub)
+		fmt.Println("get user info from: ", ProviderGithub)
 		return GetGithubUserInfo(code, state)
 	}
 	return nil
