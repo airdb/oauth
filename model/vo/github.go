@@ -109,6 +109,7 @@ func GetUserInfo(accessToken string) *GithubUserInfo {
 	var info GithubUserInfo
 	err = r.ToJSON(&info)
 	fmt.Println("access userinfo: ", err, r)
+	fmt.Println("access userinfo: ", info.Login)
 	if err != nil {
 		return &info
 	}
