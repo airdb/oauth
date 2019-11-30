@@ -1,4 +1,19 @@
-package handlers
+package vo
+
+/*
+import (
+	"encoding/base64"
+	"encoding/json"
+	"fmt"
+	"github.com/airdb/passport/drivers"
+	"golang.org/x/oauth2"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/url"
+	"strings"
+	"sync"
+)
 
 import (
 	"context"
@@ -6,7 +21,6 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-	"github.com/airdb/passport/model/vo"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -41,7 +55,7 @@ func (d *Dispatcher) New() *Gocial {
 }
 
 // Handle callback. Can be called only once for given state.
-func (d *Dispatcher) Handle(state, code string) (*vo.User, *oauth2.Token, error) {
+func (d *Dispatcher) Handle(state, code string) (*User, *oauth2.Token, error) {
 	d.mu.RLock()
 	g, ok := d.g[state]
 	d.mu.RUnlock()
@@ -60,7 +74,7 @@ type Gocial struct {
 	driver, state string
 	scopes        []string
 	conf          *oauth2.Config
-	User          vo.User
+	User          User
 	Token         *oauth2.Token
 }
 
@@ -91,14 +105,14 @@ var (
 	endpointMap = map[string]oauth2.Endpoint{}
 
 	// Map custom callbacks
-	callbackMap = map[string]func(client *http.Client, u *vo.User){}
+	callbackMap = map[string]func(client *http.Client, u *User){}
 
 	// Default scopes for each driver
 	defaultScopesMap = map[string][]string{}
 )
 
 //RegisterNewDriver adds a new driver to the existing set
-func RegisterNewDriver(driver string, defaultscopes []string, callback func(client *http.Client, u *vo.User), endpoint oauth2.Endpoint, apimap, usermap map[string]string) {
+func RegisterNewDriver(driver string, defaultscopes []string, callback func(client *http.Client, u *User), endpoint oauth2.Endpoint, apimap, usermap map[string]string) {
 	apiMap[driver] = apimap
 	userMap[driver] = usermap
 	endpointMap[driver] = endpoint
@@ -189,7 +203,7 @@ func (g *Gocial) Handle(state, code string) error {
 
 	// Scan all fields and dispatch through the mapping
 	mapKeys := keys(driverUserMap)
-	gUser := vo.User{}
+	gUser := User{}
 	for k, f := range data {
 		if !inSlice(k, mapKeys) { // Skip if not in the mapping
 			continue
@@ -264,3 +278,4 @@ func complexKeys(m map[string]map[string]string) []string {
 
 	return keys
 }
+*/

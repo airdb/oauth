@@ -4,7 +4,6 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/airdb/passport/model/vo"
 	"golang.org/x/oauth2/slack"
 )
 
@@ -31,7 +30,7 @@ var SlackAPIMap = map[string]string{
 }
 
 // SlackUserFn is a callback to parse additional fields for User
-var SlackUserFn = func(client *http.Client, u *vo.User) {
+var SlackUserFn = func(client *http.Client, u *User) {
 	// Get user ID
 	req, err := client.Get(SlackAPIMap["endpoint"] + SlackAPIMap["authEndpoint"])
 	if err != nil {

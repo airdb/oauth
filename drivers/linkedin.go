@@ -1,7 +1,6 @@
 package drivers
 
 import (
-	"github.com/airdb/passport/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/linkedin"
@@ -33,7 +32,7 @@ var LinkedInAPIMap = map[string]string{
 }
 
 // LinkedInUserFn is a callback to parse additional fields for User
-var LinkedInUserFn = func(client *http.Client, u *vo.User) {}
+var LinkedInUserFn = func(client *http.Client, u *User) {}
 
 // LinkedInDefaultScopes contains the default scopes
 var LinkedInDefaultScopes = []string{}

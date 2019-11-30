@@ -1,7 +1,6 @@
 package drivers
 
 import (
-	"github.com/airdb/passport/model/vo"
 	"io/ioutil"
 	"net/http"
 
@@ -29,7 +28,7 @@ var BitbucketAPIMap = map[string]string{
 }
 
 // BitbucketUserFn is a callback to parse additional fields for User
-var BitbucketUserFn = func(client *http.Client, u *vo.User) {
+var BitbucketUserFn = func(client *http.Client, u *User) {
 	// Set avatar
 	u.Avatar = u.Raw["links"].(map[string]interface{})["avatar"].(map[string]interface{})["href"].(string)
 

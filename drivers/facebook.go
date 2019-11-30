@@ -1,7 +1,6 @@
 package drivers
 
 import (
-	"github.com/airdb/passport/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/facebook"
@@ -29,7 +28,7 @@ var FacebookAPIMap = map[string]string{
 }
 
 // FacebookUserFn is a callback to parse additional fields for User
-var FacebookUserFn = func(client *http.Client, u *vo.User) {
+var FacebookUserFn = func(client *http.Client, u *User) {
 	u.Avatar = FacebookAPIMap["endpoint"] + "/v2.8/" + u.ID + "/picture?width=800"
 }
 

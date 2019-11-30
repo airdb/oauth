@@ -1,5 +1,6 @@
 package drivers
 
+/*
 import (
 	"github.com/airdb/passport/model/vo"
 	"net/http"
@@ -31,3 +32,4 @@ var AmazonUserFn = func(client *http.Client, u *vo.User) {}
 
 // AmazonDefaultScopes contains the default scopes
 var AmazonDefaultScopes = []string{"profile"}
+*/

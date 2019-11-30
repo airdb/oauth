@@ -1,7 +1,6 @@
 package drivers
 
 import (
-	"github.com/airdb/passport/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/foursquare"
@@ -23,7 +22,7 @@ var FoursquareAPIMap = map[string]string{
 }
 
 // FoursquareUserFn is a callback to parse additional fields for User
-var FoursquareUserFn = func(client *http.Client, u *vo.User) {
+var FoursquareUserFn = func(client *http.Client, u *User) {
 	user := u.Raw["response"].(map[string]interface{})["user"].(map[string]interface{})
 
 	u.ID = user["id"].(string)

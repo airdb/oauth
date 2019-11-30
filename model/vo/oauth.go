@@ -1,6 +1,10 @@
 package vo
 
 import (
+	"crypto/rand"
+	"encoding/base64"
+	"log"
+
 	"github.com/airdb/passport/model/po"
 )
 
@@ -71,4 +75,24 @@ func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 		return GetGithubUserInfo(code, state)
 	}
 	return nil
+}
+
+func GetOauthRedirectURL(provider string) (*string, error) {
+	// 	providerData := vo.QueryProvider(provider)
+	providerData := QueryProvider(provider)
+	switch provider {
+	case ProviderGithub:
+		return GetGithubAuthRedirectURL(providerData)
+	}
+	return nil, nil
+}
+
+// Generate a random token
+func randToken() string {
+	b := make([]byte, 32)
+	_, err := rand.Read(b)
+	if err != nil {
+		log.Println(err)
+	}
+	return base64.StdEncoding.EncodeToString(b)
 }

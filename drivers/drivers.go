@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/airdb/passport/model/vo"
 	"golang.org/x/oauth2"
 )
 
@@ -12,11 +11,22 @@ var (
 	initAPIMap           = map[string]map[string]string{}
 	initUserMap          = map[string]map[string]string{}
 	initEndpointMap      = map[string]oauth2.Endpoint{}
-	initCallbackMap      = map[string]func(client *http.Client, u *vo.User){}
+	initCallbackMap      = map[string]func(client *http.Client, u *User){}
 	initDefaultScopesMap = map[string][]string{}
 )
 
-func registerDriver(driver string, defaultscopes []string, callback func(client *http.Client, u *vo.User), endpoint oauth2.Endpoint, apimap, usermap map[string]string) {
+type User struct {
+	ID        string                 `json:"id"`
+	Username  string                 `json:"username"`
+	FirstName string                 `json:"first_name"`
+	LastName  string                 `json:"last_name"`
+	FullName  string                 `json:"full_name"`
+	Email     string                 `json:"email"`
+	Avatar    string                 `json:"avatar"`
+	Raw       map[string]interface{} `json:"raw"` // Raw data
+}
+
+func registerDriver(driver string, defaultscopes []string, callback func(client *http.Client, u *User), endpoint oauth2.Endpoint, apimap, usermap map[string]string) {
 	initAPIMap[driver] = apimap
 	initUserMap[driver] = usermap
 	initEndpointMap[driver] = endpoint
@@ -25,7 +35,7 @@ func registerDriver(driver string, defaultscopes []string, callback func(client 
 }
 
 // InitializeDrivers adds all the drivers to the register func
-func InitializeDrivers(register func(driver string, defaultscopes []string, callback func(client *http.Client, u *vo.User), endpoint oauth2.Endpoint, apimap, usermap map[string]string)) {
+func InitializeDrivers(register func(driver string, defaultscopes []string, callback func(client *http.Client, u *User), endpoint oauth2.Endpoint, apimap, usermap map[string]string)) {
 	for k := range initAPIMap {
 		register(k, initDefaultScopesMap[k], initCallbackMap[k], initEndpointMap[k], initAPIMap[k], initUserMap[k])
 	}

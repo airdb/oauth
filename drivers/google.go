@@ -1,9 +1,12 @@
 package drivers
 
+/*
+import "golang.org/x/oauth2/google"
+
 import (
+	"github.com/airdb/passport/model/vo"
 	"net/http"
 
-	"github.com/airdb/passport/model/vo"
 	"golang.org/x/oauth2/google"
 )
 
@@ -34,3 +37,4 @@ var GoogleUserFn = func(client *http.Client, u *vo.User) {}
 
 // GoogleDefaultScopes contains the default scopes
 var GoogleDefaultScopes = []string{"profile", "email"}
+*/

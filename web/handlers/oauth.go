@@ -66,18 +66,19 @@ func Callback(c *gin.Context) {
 
 func Login(c *gin.Context) {
 	provider := c.Param("provider")
-	providerData := vo.QueryProvider(provider)
-
-	authURL, err := NewDispatcher().New().Driver(provider).Redirect(
-		providerData.ClientID,
-		providerData.ClientSecret,
-		providerData.RedirectURI,
-	)
+	/*
+		authURL, err := NewDispatcher().New().Driver(provider).Redirect(
+			providerData.ClientID,
+			providerData.ClientSecret,
+			providerData.RedirectURI,
+		)
+	*/
+	authURL, err := vo.GetOauthRedirectURL(provider)
 	if err != nil {
 		c.Redirect(http.StatusFound, "/")
 	}
 	// authURL := fmt.Sprintf("%s?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=bbhj", providerData.URL, providerData.ClientID, providerData.RedirectURI)
 
 	fmt.Println(authURL)
-	c.Redirect(http.StatusFound, authURL)
+	c.Redirect(http.StatusFound, *authURL)
 }

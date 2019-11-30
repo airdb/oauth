@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/airdb/passport/model/vo"
 	"golang.org/x/oauth2"
 )
 
@@ -30,7 +29,7 @@ var AsanaAPIMap = map[string]string{
 }
 
 // AsanaUserFn is a callback to parse additional fields for User
-var AsanaUserFn = func(client *http.Client, u *vo.User) {
+var AsanaUserFn = func(client *http.Client, u *User) {
 	userData := u.Raw["data"].(map[string]interface{})
 	u.ID = fmt.Sprintf("%.0f", userData["id"].(float64))
 	u.Email = userData["email"].(string)

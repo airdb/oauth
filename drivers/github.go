@@ -2,7 +2,6 @@ package drivers
 
 import (
 	"encoding/json"
-	"github.com/airdb/passport/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/github"
@@ -31,7 +30,7 @@ var GithubAPIMap = map[string]string{
 }
 
 // GithubUserFn is a callback to parse additional fields for User
-var GithubUserFn = func(client *http.Client, u *vo.User) {
+var GithubUserFn = func(client *http.Client, u *User) {
 	// Used to parse the email from response
 	type additionalEmail struct {
 		Email string `json:"email"`
