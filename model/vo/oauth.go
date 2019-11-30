@@ -74,7 +74,6 @@ func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 }
 
 func GetAuthRedirectURL(provider string) (*string, error) {
-	// 	providerData := vo.QueryProvider(provider)
 	providerData := QueryProvider(provider)
 	switch provider {
 	case ProviderGithub:

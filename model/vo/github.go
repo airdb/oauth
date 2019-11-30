@@ -163,14 +163,6 @@ func ToPoGitHubUserInfo(info *GithubUserInfo) *po.GitHubUserInfo {
 }
 
 func GetGithubAuthRedirectURL(providerData *ProviderSecret) (*string, error) {
-	/*
-		authURL := ""
-		NewDispatcher().New().Driver(ProviderGithub).Redirect(
-			providerData.ClientID,
-			providerData.ClientSecret,
-			providerData.RedirectURI,
-		)
-	*/
 	state := randToken()
 	authURL := fmt.Sprintf("%s&client_id=%s&redirect_uri=%s&state=%s",
 		"https://github.com/login/oauth/authorize?&response_type=code&scope=snsapi_login&scope=user",

