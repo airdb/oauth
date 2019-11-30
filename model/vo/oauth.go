@@ -23,6 +23,11 @@ type LoginReq struct {
 	State string `form:"state"`
 }
 
+type LoginResp struct {
+	Nickname   string `json:"nickname"`
+	Headimgurl string `json:"headimgurl"`
+}
+
 type User struct {
 	ID        string                 `json:"id"`
 	Username  string                 `json:"username"`
