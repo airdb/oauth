@@ -11,8 +11,8 @@ type WechatAccessTokenResp struct {
 	Openid       string `json:"openid"`
 	Scope        string `json:"scope"`
 	Unionid      string `json:"unionid"`
-	Errcode      int    `json:"errcode"`
-	Errmsg       string `json:"errmsg"`
+	Errcode      int    `json:"errcode,omitempty"`
+	Errmsg       string `json:"errmsg,omitempty"`
 }
 
 type WechatUserInfo struct {
