@@ -2,6 +2,8 @@ package vo
 
 import (
 	"fmt"
+	"github.com/imroc/req"
+	"log"
 )
 
 type WechatAccessTokenResp struct {
@@ -40,22 +42,35 @@ func GetWechatAuthRedirectURL(providerData *ProviderSecret) (*string, error) {
 	return &authURL, nil
 }
 
-/*
-func GetWechatAccessToken(code string) *WechatUserInfo {
-	url := fmt.Sprintf("%s?appid=%s&secret=%s&code=%s&grant_type=authorization_code",
-		"https://api.weixin.qq.com/sns/oauth2/access_token",
-		weapp.Appid,
-		weapp.Secret,
-		code,
-	)
+func GetWechatAccessToken(code, state string) *WechatUserInfo {
+	p := QueryProvider(ProviderWechat)
 
-	r, _ := req.Get(url)
+	param := req.Param{
+		"appid":        p.ClientID,
+		"secret":       p.ClientSecret,
+		"code":         code,
+		"state":        state,
+		"redirect_uri": p.RedirectURI,
+		"grant_type":   "authorization_code",
+	}
+
+	header := req.Header{
+		"Accept": "application/json",
+	}
+
+	apiurl := "https://api.weixin.qq.com/sns/oauth2/access_token"
+
+	r, err := req.Get(apiurl, header, param)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	weinfo := &WechatAccessTokenResp{}
 	fmt.Println("access_token: ", r)
-	err := r.ToJSON(&weinfo)
+	err = r.ToJSON(&weinfo)
 	if err != nil {
-		fmt.Println("error: ", err)
+		fmt.Println("error", weinfo)
+		return nil
 	}
 
 	fmt.Println("access_token: ", weinfo.AccessToken)
@@ -84,18 +99,18 @@ func GetWechatUserInfo(weinfo *WechatAccessTokenResp) *WechatUserInfo {
 		fmt.Println("error: ", err)
 	}
 
-	info := po.WechatUserInfo{
-		Openid:     userinfo.Openid,
-		Nickname:   userinfo.Nickname,
-		Sex:        userinfo.Sex,
-		Language:   userinfo.Language,
-		City:       userinfo.City,
-		Country:    userinfo.Country,
-		Headimgurl: userinfo.Headimgurl,
-		Unionid:    userinfo.Unionid,
-	}
+	/*
+		info := po.WechatUserInfo{
+			Openid:     userinfo.Openid,
+			Nickname:   userinfo.Nickname,
+			Sex:        userinfo.Sex,
+			Language:   userinfo.Language,
+			City:       userinfo.City,
+			Country:    userinfo.Country,
+			Headimgurl: userinfo.Headimgurl,
+			Unionid:    userinfo.Unionid,
+		}
+	*/
 
-	po.AddWechatUserInfo(&info)
 	return &userinfo
 }
-*/

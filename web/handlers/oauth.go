@@ -28,6 +28,16 @@ func IndexHandler(c *gin.Context) {
 	}
 }
 
+func Login(c *gin.Context) {
+	provider := c.Param("provider")
+	authURL, err := vo.GetAuthRedirectURL(provider)
+	if err != nil {
+		c.Redirect(http.StatusFound, "/")
+	}
+
+	c.Redirect(http.StatusFound, *authURL)
+}
+
 // Handle callback of provider
 func Callback(c *gin.Context) {
 	provider := c.Param("provider")
@@ -62,15 +72,4 @@ func Callback(c *gin.Context) {
 			Headimgurl: userInfo.AvatarURL,
 		},
 	)
-}
-
-func Login(c *gin.Context) {
-	provider := c.Param("provider")
-	authURL, err := vo.GetAuthRedirectURL(provider)
-	if err != nil {
-		c.Redirect(http.StatusFound, "/")
-	}
-
-	fmt.Println(authURL)
-	c.Redirect(http.StatusFound, *authURL)
 }

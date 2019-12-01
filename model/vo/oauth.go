@@ -69,6 +69,8 @@ func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 	switch provider {
 	case ProviderGithub:
 		return GetGithubUserInfo(code, state)
+	case ProviderWechat:
+		// return GetWechatAccessToken(code, state)
 	}
 	return nil
 }
