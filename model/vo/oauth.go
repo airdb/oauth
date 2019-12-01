@@ -77,7 +77,11 @@ func GetAuthRedirectURL(provider string) (*string, error) {
 	providerData := QueryProvider(provider)
 	switch provider {
 	case ProviderGithub:
+		providerData.URL = "https://github.com/login/oauth/authorize?&response_type=code&scope=snsapi_login&scope=user"
 		return GetGithubAuthRedirectURL(providerData)
+	case ProviderWechat:
+		providerData.URL = "https://open.weixin.qq.com/connect/qrconnect?&response_type=code&scope=snsapi_login"
+		return GetWechatAuthRedirectURL(providerData)
 	}
 	return nil, nil
 }
