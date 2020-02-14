@@ -1,5 +1,6 @@
 package drivers
 
+/*
 import (
 	"fmt"
 	"net/http"
@@ -43,3 +44,5 @@ var AsanaUserFn = func(client *http.Client, u *User) {
 
 // AsanaDefaultScopes contains the default scopes
 var AsanaDefaultScopes = []string{}
+
+*/

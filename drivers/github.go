@@ -1,5 +1,6 @@
 package drivers
 
+/*
 import (
 	"encoding/json"
 	"net/http"
@@ -9,7 +10,7 @@ import (
 
 const githubDriverName = "github"
 
-func init() {
+func Init() {
 	registerDriver(githubDriverName, GithubDefaultScopes, GithubUserFn, github.Endpoint, GithubAPIMap, GithubUserMap)
 }
 
@@ -58,3 +59,4 @@ var GithubUserFn = func(client *http.Client, u *User) {
 // GithubDefaultScopes contains the default scopes
 // var GithubDefaultScopes = []string{"user:email"}
 var GithubDefaultScopes = []string{"user"}
+*/

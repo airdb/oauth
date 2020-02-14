@@ -1,5 +1,6 @@
 package drivers
 
+/*
 import (
 	"io/ioutil"
 	"net/http"
@@ -58,3 +59,4 @@ var SlackUserFn = func(client *http.Client, u *User) {
 
 // SlackDefaultScopes contains the default scopes
 var SlackDefaultScopes = []string{"users.profile:read"}
+*/

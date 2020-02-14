@@ -52,6 +52,7 @@ func FromPoProviderSecrets(poSecrets []*po.Secret) (secrets []*ProviderSecret) {
 	for _, secret := range poSecrets {
 		secrets = append(secrets, FromPoProviderSecret(secret))
 	}
+
 	return
 }
 
@@ -70,13 +71,15 @@ func GetUserInfoFromOauth(provider string, code, state string) *GithubUserInfo {
 	case ProviderGithub:
 		return GetGithubUserInfo(code, state)
 	case ProviderWechat:
-		// return GetWechatAccessToken(code, state)
+		return nil
 	}
+
 	return nil
 }
 
 func GetAuthRedirectURL(provider string) (*string, error) {
 	providerData := QueryProvider(provider)
+
 	switch provider {
 	case ProviderGithub:
 		providerData.URL = "https://github.com/login/oauth/authorize?&response_type=code&scope=snsapi_login&scope=user"
@@ -85,5 +88,6 @@ func GetAuthRedirectURL(provider string) (*string, error) {
 		providerData.URL = "https://open.weixin.qq.com/connect/qrconnect?&response_type=code&scope=snsapi_login"
 		return GetWechatAuthRedirectURL(providerData)
 	}
+
 	return nil, nil
 }

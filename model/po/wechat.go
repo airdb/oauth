@@ -2,9 +2,10 @@ package po
 
 import (
 	"fmt"
+	"time"
+
 	"github.com/airdb/sailor/dbutils"
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 type WechatUserInfo struct {
@@ -36,43 +37,43 @@ func AddWechatUserInfo(info *WechatUserInfo) {
 type GitHubUserInfo struct {
 	gorm.Model
 
-	Login             string
-	GithubID          int
-	NodeID            string
-	AvatarURL         string
-	GravatarID        string
-	URL               string
-	HTMLURL           string
-	FollowersURL      string
-	FollowingURL      string
-	GistsURL          string
-	StarredURL        string
-	SubscriptionsURL  string
-	OrganizationsURL  string
-	ReposURL          string
-	EventsURL         string
-	ReceivedEventsURL string
-	Type              string
-	SiteAdmin         bool
-	// Name                    interface{}
-	Company                 string
-	Blog                    string
-	Location                string
-	Email                   string
-	Hireable                bool
-	Bio                     string
+	GithubID                int
 	PublicRepos             int
 	PublicGists             int
 	Followers               int
 	Following               int
-	GithubCreatedAt         time.Time
-	GithubUpdatedAt         time.Time
 	PrivateGists            int
 	TotalPrivateRepos       int
 	OwnedPrivateRepos       int
 	DiskUsage               int
 	Collaborators           int
 	TwoFactorAuthentication bool
+	SiteAdmin               bool
+	Hireable                bool
+	Login                   string
+	NodeID                  string
+	AvatarURL               string
+	GravatarID              string
+	URL                     string
+	HTMLURL                 string
+	FollowersURL            string
+	FollowingURL            string
+	GistsURL                string
+	StarredURL              string
+	SubscriptionsURL        string
+	OrganizationsURL        string
+	ReposURL                string
+	EventsURL               string
+	ReceivedEventsURL       string
+	Type                    string
+	// Name                    interface{}
+	Company         string
+	Blog            string
+	Location        string
+	Email           string
+	Bio             string
+	GithubCreatedAt time.Time
+	GithubUpdatedAt time.Time
 }
 
 func UpsertGithubUserInfo(info *GitHubUserInfo) {

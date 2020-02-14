@@ -2,8 +2,9 @@ package vo
 
 import (
 	"fmt"
-	"github.com/imroc/req"
 	"log"
+
+	"github.com/imroc/req"
 )
 
 type WechatAccessTokenResp struct {
@@ -66,7 +67,9 @@ func GetWechatAccessToken(code, state string) *WechatUserInfo {
 	}
 
 	weinfo := &WechatAccessTokenResp{}
+
 	fmt.Println("access_token: ", r)
+
 	err = r.ToJSON(&weinfo)
 	if err != nil {
 		fmt.Println("error", weinfo)
@@ -75,25 +78,31 @@ func GetWechatAccessToken(code, state string) *WechatUserInfo {
 
 	fmt.Println("access_token: ", weinfo.AccessToken)
 	fmt.Println("access_token: ", weinfo.RefreshToken)
+
 	if weinfo.Errmsg != "" {
 		fmt.Println("error_info", weinfo.Errcode, weinfo.Errmsg)
 	}
+
 	fmt.Println("xxxx", weinfo.AccessToken, weinfo.Openid)
+
 	return GetWechatUserInfo(weinfo)
 }
 
 func GetWechatUserInfo(weinfo *WechatAccessTokenResp) *WechatUserInfo {
 	fmt.Println("get_wechat_user_info", weinfo.Openid)
+
 	param := req.Param{
 		"access_token": weinfo.AccessToken,
 		"openid":       weinfo.Openid,
 	}
+
 	r, err := req.Get("https://api.weixin.qq.com/sns/userinfo", param)
 	if err != nil {
 		fmt.Println("get_userinfo_failed, ", err)
 	}
 
 	var userinfo WechatUserInfo
+
 	err = r.ToJSON(&userinfo)
 	if err != nil {
 		fmt.Println("error: ", err)
