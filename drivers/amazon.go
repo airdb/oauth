@@ -2,7 +2,7 @@ package drivers
 
 /*
 import (
-	"github.com/airdb/passport/model/vo"
+	"github.com/airdb/oauth/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/amazon"

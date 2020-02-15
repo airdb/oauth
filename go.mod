@@ -1,4 +1,4 @@
-module github.com/airdb/passport
+module github.com/airdb/oauth
 
 go 1.13
 

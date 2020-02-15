@@ -1,7 +1,7 @@
 package vo
 
 import (
-	"github.com/airdb/passport/model/po"
+	"github.com/airdb/oauth/model/po"
 )
 
 const (

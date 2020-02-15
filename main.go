@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/airdb/passport/web"
+	"github.com/airdb/oauth/web"
 )
 
 func main() {

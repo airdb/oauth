@@ -4,7 +4,7 @@ package drivers
 import "golang.org/x/oauth2/google"
 
 import (
-	"github.com/airdb/passport/model/vo"
+	"github.com/airdb/oauth/model/vo"
 	"net/http"
 
 	"golang.org/x/oauth2/google"

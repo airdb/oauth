@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/airdb/passport/model/po"
+	"github.com/airdb/oauth/model/po"
 	"github.com/imroc/req"
 )
 

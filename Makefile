@@ -1,11 +1,20 @@
+SRC = $(shell go env GOPATH)
+PWD = $(shell pwd)
 
-REPO = airdb/passport
-all: fmt lint
+GITHUB = $(shell echo $(PWD) | sed "s@$(SRC)/src/@@")
+REPO = $(shell echo $(GITHUB) | sed "s@github.com/@@")
+
+all:
+	echo $(GITHUB)
+	echo $(REPO)
+	docker build -t $(REPO) . --build-arg GITHUB=$(GITHUB) --build-arg BUILDDIR=/go/src/$(GITHUB)
 
 fmt:
 	gofmt -s -w .
 
+push:
+	docker push $(REPO)
+	gofmt -s -w .
+
 exec:
-	docker run -it -v $(shell pwd):/go/src/${REPO}/ airdb/golint /bin/bash
-lint:
-	docker run -it -v $(shell pwd):/go/src/github.com/${REPO} airdb/golint ${REPO}
+	docker run -it  $(REPO) bash

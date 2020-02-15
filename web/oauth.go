@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/airdb/passport/model/vo"
+	"github.com/airdb/oauth/model/vo"
 	"github.com/airdb/sailor"
 	"github.com/airdb/sailor/enum"
 	"github.com/gin-gonic/gin"

@@ -1,6 +1,6 @@
 # Passport
 
-![Build Status](https://github.com/airdb/passport/workflows/Go/badge.svg)
+![Build Status](https://github.com/airdb/oauth/workflows/Go/badge.svg)
 
 
 # Oauth Drivers:

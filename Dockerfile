@@ -2,34 +2,30 @@
 FROM golang
 MAINTAINER info@airdb.com
 
-ENV PROJ=passport
-ENV BIN=main
-ENV GITHUB=github.com/airdb/${PROJ}
-ENV BUILDDIR=/go/src/${GITHUB}
-ENV DEPLOYDIR=/srv/${PROJ}
-ENV RUNBIN=${DEPLOYDIR}/${BIN}
+#ENV GITHUB=github.com/airdb/oauth
+ARG GITHUB
+ARG BUILDDIR
+ENV BUILDDIR=${BUILDDIR}
+#ENV BUILDDIR=/go/src/${GITHUB}
 
 WORKDIR ${BUILDDIR}
 
 ADD . ${BUILDDIR}
 
-RUN go mod download && \
+RUN go get -u github.com/swaggo/swag/cmd/swag && \
+	GO111MODULE=off swag init -g web/router.go && \
 	go build -o main main.go
 
 
 # Stage 2: Release the binary from the builder stage
 FROM golang
 
-ENV PROJ=passport
-ENV BIN=main
-ENV GITHUB=github.com/airdb/${PROJ}
+ENV GITHUB=github.com/airdb/oauth
 ENV BUILDDIR=/go/src/${GITHUB}
-ENV DEPLOYDIR=/srv/${PROJ}
-ENV RUNBIN=${DEPLOYDIR}/${BIN}
 
-COPY --from=0 ${BUILDDIR}/ ${DEPLOYDIR}
+COPY --from=0 ${BUILDDIR}/ /srv
 
 EXPOSE 8080
 
-WORKDIR ${DEPLOYDIR}
-CMD ${RUNBIN}
+WORKDIR /srv
+CMD ["/srv/main"]
