@@ -27,17 +27,17 @@ func WechatLogin(c *gin.Context) {
 
 	wechat.Debug = true
 	// wechat.GetAccessToken()
-	ss, err := wechat.New(
-		os.Getenv("WECHAT_TOKEN"),
-		os.Getenv("WECHAT_APPID"),
-		os.Getenv("WECHAT_APPSECRET"),
-	).Jscode2Session(req.Code)
 
-	log.Println(ss.UserId, err)
+	ss, err := wechat.New(&wechat.WxConfig{
+		AppId:  os.Getenv("WECHAT_APPID"),
+		Secret: os.Getenv("WECHAT_APPSECRET"),
+	}).Jscode2Session(req.Code)
+
+	log.Println(ss.OpenId, err)
 
 	c.JSON(http.StatusOK, sailor.HTTPAirdbResponse{
 		Code:    enum.AirdbSuccess,
 		Success: true,
-		Data:    "xxx",
+		Data:    ss.OpenId,
 	})
 }
