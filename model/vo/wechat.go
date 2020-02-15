@@ -31,6 +31,13 @@ type WechatUserInfo struct {
 	Unionid    string
 }
 
+type WechatLoginReq struct {
+	Code string `form:"code"`
+}
+
+type WechatLoginResp struct {
+}
+
 func GetWechatAuthRedirectURL(providerData *ProviderSecret) (*string, error) {
 	state := randToken()
 	authURL := fmt.Sprintf("%s&appid=%s&redirect_uri=%s&state=%s",
