@@ -16,5 +16,5 @@ push:
 	docker push $(REPO)
 	gofmt -s -w .
 
-exec:
-	docker run -it  $(REPO) bash
+exec bash:
+	docker run -it $(REPO) bash

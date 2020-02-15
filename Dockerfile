@@ -25,7 +25,7 @@ ENV BUILDDIR=/go/src/${GITHUB}
 
 COPY --from=0 ${BUILDDIR}/ /srv
 
-EXPOSE 8080
+EXPOSE 80
 
 WORKDIR /srv
 CMD ["/srv/main"]
