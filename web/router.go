@@ -3,6 +3,7 @@ package web
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http/httptest"
 
 	"github.com/airdb/sailor/config"
@@ -10,9 +11,9 @@ import (
 )
 
 func Run() {
-	config.Init()
-
-	err := NewRouter().Run(config.GetDefaultBindAddress())
+	address := config.GetDefaultBindAddress()
+	log.Println("web server start at", address)
+	err := NewRouter().Run(address)
 	if err != nil {
 		fmt.Println("error: ", err)
 	}
