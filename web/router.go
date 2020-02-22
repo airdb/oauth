@@ -12,7 +12,7 @@ import (
 
 func Run() {
 	address := config.GetDefaultBindAddress()
-	log.Println("web server start at", address)
+	log.Printf("web server start at http://%s\n", address)
 	err := NewRouter().Run(address)
 	if err != nil {
 		fmt.Println("error: ", err)
@@ -30,6 +30,7 @@ func NewRouter() *gin.Engine {
 	v1API := router.Group("/apis/oauth/v1")
 
 	v1API.GET("/wechat/login", WechatLogin)
+	v1API.GET("/token", Token)
 	// v1API.GET("/:provider", Login)
 	// v1API.GET("/:provider/callback", Callback)
 

@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/airdb/oauth/model/vo"
 	"github.com/airdb/sailor"
 	"github.com/airdb/sailor/enum"
@@ -76,4 +78,37 @@ func Callback(c *gin.Context) {
 			Headimgurl: userInfo.AvatarURL,
 		},
 	})
+}
+
+type Claims struct {
+	Username string `json:"username"`
+	jwt.StandardClaims
+}
+
+// Create the JWT key used to create the signature
+var jwtKey = []byte("my_secret_key")
+
+func Token(c *gin.Context) {
+	// Declare the expiration time of the token
+	// here, we have kept it as 5 minutes
+	expirationTime := time.Now().Add(5 * time.Minute)
+	// Create the JWT claims, which includes the username and expiry time
+	claims := &Claims{
+		Username: "xxx",
+		StandardClaims: jwt.StandardClaims{
+			// In JWT, the expiry time is expressed as unix milliseconds
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
+
+	// Declare the token with the algorithm used for signing, and the claims
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	// Create the JWT string
+	tokenString, err := token.SignedString(jwtKey)
+
+	if err != nil {
+		return
+	}
+	log.Println(tokenString)
+	c.String(http.StatusOK, tokenString)
 }
